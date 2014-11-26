@@ -1,0 +1,1 @@
+module clonedetectors::Type2CloneDetector
