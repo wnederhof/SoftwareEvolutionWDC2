@@ -3,6 +3,7 @@ import Prelude;
 import lang::java::jdt::m3::AST;
 import Traversal;
 import Node;
+import utils::LocCalculator;
 
 map[value, list[tuple[value,loc]]] bucket = ();
 
@@ -131,22 +132,15 @@ private map[value, list[tuple[value,loc]]] calculateSubtreeClones(set[Declaratio
 				}
 			}		
 		}
-	}
-			
-	for (c <- finalClones) {
-		println("clone class size <size(finalClones[c])>");
-		for (clone <- finalClones[c]){
-			println(clone[1]);
-		}
 	}	
 	
 	return finalClones;
 }
 
 
-public int calculateClones(loc project) {	
+public map[value, list[tuple[value,loc]]] calculateClones(loc project) {	
 	set[Declaration] AST = createAstsFromEclipseProject(project, true);
-	map[value, list[value]] clones = calculateSubtreeClones(AST,5);
+	map[value, list[tuple[value,loc]]] clones = calculateSubtreeClones(AST,5);
 	
-	return size(clones);
+	return clones;
 }
