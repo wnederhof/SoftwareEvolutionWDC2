@@ -215,11 +215,12 @@ private set[set[tuple[str,loc,value]]] getClones(map[tuple[str,loc,value], map[s
 		println("size of C1 <size(c)>");
 	}
 			
-	*/	
+		
 	println("number of T2s : <size(cloneClassesT2)>");	
 	for (c <- cloneClassesT2){
 		println("size of C2 <size(c)>");
 	}
+	*/
 	
 	//Returning code clones of the type needed
 	if (cloneType == 1)
