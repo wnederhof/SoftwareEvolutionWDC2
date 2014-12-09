@@ -4,5 +4,5 @@ import clonedetectors::Type1CloneDetector;
 import Prelude;
 
 public void main() {
-	println("Clones: <calculateClones(|project://SimpleProject|)>");
+	println("Type 1 clones: <Type1CloneDetector::calculateClones(|project://TestProject|)>");
 }
