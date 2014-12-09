@@ -5,16 +5,18 @@ import lang::java::jdt::m3::AST;
 import Node;
 
 
-public void calculateClones(loc project) {
+public set[set[tuple[str,loc,value]]] calculateClonesT2(loc project, int cloneType) {
 	
 	set[Declaration] ast = createAstsFromEclipseProject(project, true);
 	
 	map[tuple[str,loc,value], map[str,int]] methods = getMethodsWithMetrics(ast);
 	
-	map[tuple[str,loc,value], map[str,int]] clones = getClones(methods);
+	set[set[tuple[str,loc,value]]] clones = getClones(methods, cloneType);
+	
+	return clones;
 }
 
-
+//We get the methods that will be processed in order to get clones
 private map[tuple[str,loc,value], map[str,int]] getMethodsWithMetrics(set[Declaration] ast)
 {
 	map[tuple[str,loc,value], map[str,int]] methods = ();
@@ -23,10 +25,7 @@ private map[tuple[str,loc,value], map[str,int]] getMethodsWithMetrics(set[Declar
 		visit (d){
 			case \method(Type \return, str name, list[Declaration] parameters, list[Expression] exceptions, Statement impl):
 			{	
-				num i = countStatements(impl);
-				//println(i);
-				//if (countStatements(impl) >= 5){
-				if (i >= 5){
+				if (countStatements(impl) >= 5){
 					map[str, int] metrics = CalculateMetrics(impl);
 					methods += (<name,impl@src,delAnnotationsRec(impl)>: metrics);
 				}				
@@ -37,7 +36,7 @@ private map[tuple[str,loc,value], map[str,int]] getMethodsWithMetrics(set[Declar
 	return methods;
 }
 
-//This must be written better
+//Initializes a map with the metrics and the score
 private map[str, int] createMetrics(){
 
 	map[str, int] result = ();
@@ -48,7 +47,7 @@ private map[str, int] createMetrics(){
 	result += ("callsToOtherFunctions":0);
 	result += ("uniqueCallsToOtherFunctions":0);
 	
-	result += ("arcs":0); // ??
+	result += ("arcs":0);
 	result += ("exit":0); // breaks and returns.
 	
 	//declaration statements + executable statements
@@ -67,6 +66,7 @@ private map[str, int] createMetrics(){
 	return result;
 }
 
+//Here we count and set the score for each metric of each method
 private map[str, int] CalculateMetrics(Statement statement)
 {
 	map[str, int] result = createMetrics();
@@ -154,9 +154,6 @@ private map[str, int] CalculateMetrics(Statement statement)
 				result["executableStatements"] +=1;
 			}
 			
-			//case \expressionStatement(Expression stmt): 
-				//println(stmt);
-				
 			case \methodCall(bool isSuper, Expression receiver, str name, list[Expression] arguments):{	
 				
 				result["expressionStatement"] += 1;			
@@ -172,36 +169,37 @@ private map[str, int] CalculateMetrics(Statement statement)
 	return result;
 }
 
-
-private map[tuple[str,loc,value], map[str,int]] getClones(map[tuple[str,loc,value], map[str,int]] methods) {
+//Compare the every method in the map to obtain the clones
+private set[set[tuple[str,loc,value]]] getClones(map[tuple[str,loc,value], map[str,int]] methods, int cloneType) {
 	
-	map[tuple[str,loc,value], map[str,int]] result = ();	
+	set[set[tuple[str,loc,value]]] result = {};	
 	
-	//{{a,b},{c,d}}
+	//{{a,b},{c,d}} these are clone classes {a,b} and {c,d}
 	set[set[tuple[str,loc,value]]] cloneClassesT1 = {};
 	set[set[tuple[str,loc,value]]] cloneClassesT2 = {};
 	
 	for (m <- methods){
 		
-		set[tuple[str,loc,value]] classesT1 = {m};	
+		set[tuple[str,loc,value]] classesT1 = {m};
 		set[tuple[str,loc,value]] classesT2 = {m};
 		
 		for (i <- methods){
 		
+			//Whether the tuple M is different than the tuple I
+			//i.e Not the same method
 			if (m != i)
 			{
-				//Type I
+				//Type I (if needed) compares the content of the method
 				if (m[2] == i[2])
-				{
 					classesT1 += i;
-				}
-				//Type II
-				else if (methods[m] == methods[i]){
+				
+				//Type II compares the metrics of the methods
+				else if (methods[m] == methods[i])
 					classesT2 += i;
-				}
 			}
 		}
 		
+		//Adds the clones to the results
 		if (size(classesT1) > 1){
 			cloneClassesT1 += {classesT1};
 		}
@@ -211,51 +209,37 @@ private map[tuple[str,loc,value], map[str,int]] getClones(map[tuple[str,loc,valu
 
 	}
 	
-	println("number of T1s : <size(cloneClassesT1)>");
+
+	/*println("number of T1s : <size(cloneClassesT1)>");
 	for (c <- cloneClassesT1){
 		println("size of C1 <size(c)>");
-		/*for (i <- c)
-			println("<i[0]> | <i[1]>");*/
 	}
 			
-		
+	*/	
 	println("number of T2s : <size(cloneClassesT2)>");	
 	for (c <- cloneClassesT2){
 		println("size of C2 <size(c)>");
-		/*for (i <- c)
-			println("<i[0]> | <i[1]>");*/
 	}
 	
-	//iprintln(cloneClassesT1);
-	//println(cloneClassesT2);
-	
-	
-	/*for (tuple[str,loc] m <- methods){
+	//Returning code clones of the type needed
+	if (cloneType == 1)
+		result = cloneClassesT1;
+	else if (cloneType == 2)
+		result = cloneClassesT2;
 		
-		//iprintln(m);
-		aux[m] = methods[m];
-		methods = methods - aux;
-		 
-		//iprintln(aux);
 		
-		if (aux[m] ==  getClones(methods)){
-			//println(m);
-			result[m] = aux[m];
-		}
-	}*/
-	
+		
 	return result;
 }
 
+//We count the size of the methods (blocks, statements and so on...)
 private num countStatements(Statement impl){
 	num result = 0;
 		
 		visit (impl){
-			case \block(list[Statement] statements):{
+			case \block(list[Statement] statements):
 				result += (size(statements));
-			}
-				
-				
+			
 			case \switch(Expression expression, list[Statement] statements):
 				result += (size(statements));
 							
@@ -266,6 +250,5 @@ private num countStatements(Statement impl){
 				result += 2;
 		}
 	
-	//println(result);
 	return result;
 }

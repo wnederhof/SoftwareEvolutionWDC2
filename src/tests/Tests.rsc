@@ -39,7 +39,27 @@ void testType1(){
 
 }
 
-void testType2(){}
+void testType2(){
+	testGetMethods();
+	testCountStatements();
+	testCreateMetrics();
+	testCalculateMetrics();
+	testGetClones();
+
+}
+
+
+test bool testGetMethods(){}
+test bool testCountStatements(){}
+test bool testCreateMetrics(){}
+test bool testCalculateMetrics(){}
+test bool testGetClones(){}
+
+
+
+
+
+
 
 void testAll() {
 	println("Testing Type 1 Clone Detection");
