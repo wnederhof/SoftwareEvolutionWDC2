@@ -102,6 +102,5 @@ public num countStatements(Statement impl){
 		    case \assert(_): result += 1;
 		    case \assert(_,_): result += 1;
 		}
-	//println(result);
 	return result;
 }

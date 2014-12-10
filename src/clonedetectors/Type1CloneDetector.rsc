@@ -6,12 +6,10 @@ import Traversal;
 import Node;
 import utils::Utils;
 
-map[value, list[tuple[loc,value]]] bucket = ();
-
 /*
 * Add a statement to the bucket
 */
-private void addStatementToBucket(Statement st)
+private map[value, list[tuple[loc,value]]] addStatementToBucket(Statement st, map[value, list[tuple[loc,value]]] bucket)
 {
 	loc source = st@src;
 	s = delAnnotationsRec(st);
@@ -19,12 +17,14 @@ private void addStatementToBucket(Statement st)
 		bucket[s] = [];
 	}
 	bucket[s] += [<source,st>];
+
+	return bucket;
 }
 
 /*
 * Add a declaration to the bucket
 */
-private void addDeclarationToBucket(Declaration dec)
+private map[value, list[tuple[loc,value]]] addDeclarationToBucket(Declaration dec,map[value, list[tuple[loc,value]]] bucket)
 {
 	loc source = dec@src;
 	d = delAnnotationsRec(dec);
@@ -32,6 +32,8 @@ private void addDeclarationToBucket(Declaration dec)
 		bucket[d] = [];
 	}
 	bucket[d] += [<source,dec>];
+	
+	return bucket;
 }
 
 /*
@@ -39,7 +41,7 @@ private void addDeclarationToBucket(Declaration dec)
 */
 public set[set[tuple[loc,value]]] calculateSubtreeClones(set[Declaration] AST, int threshold) {
 	
-	bucket = ();
+	map[value, list[tuple[loc,value]]] bucket = ();
 	map[value, list[tuple[loc,value]]] tempClones = ();
 	map[value, list[tuple[loc,value]]] finalClones = ();
 	
@@ -55,19 +57,19 @@ public set[set[tuple[loc,value]]] calculateSubtreeClones(set[Declaration] AST, i
 					case \method(_, _, _, _, Statement impl) :
 					{	
 						if(countStatements(impl) >= threshold)
-							addDeclarationToBucket(dec);
+							bucket = addDeclarationToBucket(dec, bucket);
 					}	
 					case \constructor(_, _, _ , Statement impl) :
 					{
 						if(countStatements(impl) >= threshold)
-							addDeclarationToBucket(dec);
+							bucket = addDeclarationToBucket(dec, bucket);
 					}
 				}
 			}
 			case Statement st:
 			{
 				if(countStatements(st) >= threshold)
-					addStatementToBucket(st);
+					bucket = addStatementToBucket(st, bucket);
 			}
 		}
 	}
@@ -83,7 +85,7 @@ public set[set[tuple[loc,value]]] calculateSubtreeClones(set[Declaration] AST, i
 	finalClones = tempClones;
 	
 	/*
-	* remove clone classes that are strictly included in others
+	* remove clone classes that are strictly included in others (subsumption)
 	*/
 	for (c <- tempClones){
 		visit(tempClones[c][0][1]){
@@ -106,6 +108,9 @@ public set[set[tuple[loc,value]]] calculateSubtreeClones(set[Declaration] AST, i
 		}
 	}	
 	
+	/*
+	* create the final structure of clones to be returned
+	*/
 	set[set[tuple[loc,value]]] clones = {};
 	for(clone <- finalClones){
 		set[tuple[loc,value]] cloneEl = {};

@@ -1,0 +1,15 @@
+{"cloneMetrics" : [{"cloneType" : 1,"duplicationPercentage" : 55.00,"noOfCloneClasses" : 1,"biggestClone" : 8,"biggestCloneClass" : 2,"exampleClones" : [{"fileName" : "Test.java","clone" : "public void a() {
+		System.out.println("a");
+		System.out.println("a");
+		System.out.println("b");
+		System.out.println("c");
+		System.out.println("d");
+		System.out.println("a");
+	}"},{"fileName" : "Test2.java","clone" : "public void a() {
+		System.out.println("a");
+		System.out.println("a");
+		System.out.println("b");
+		System.out.println("c");
+		System.out.println("d");
+		System.out.println("a");
+	}"}]},{"cloneType" : 2,"duplicationPercentage" : 0.,"noOfCloneClasses" : 0,"biggestClone" : 0,"biggestCloneClass" : 0,"exampleClones" : []}],"files":[{"file": "Test2.java","lines": 11,"clones": [{"cloneType": 1,"lineStart": 3,"lineEnd": 10,"description": "Test.java (Line 3 to 10);"}]},{"file": "Test.java","lines": 19,"clones": [{"cloneType": 1,"lineStart": 3,"lineEnd": 10,"description": "Test2.java (Line 3 to 10);"}]}]}
