@@ -26,7 +26,7 @@ private map[tuple[loc,value], map[str,int]] getMethodsWithMetrics(set[Declaratio
 			case \method(Type \return, str name, list[Declaration] parameters, list[Expression] exceptions, Statement impl):
 			{	
 				if (countStatements(impl) >= 5){
-					map[str, int] metrics = CalculateMetrics(impl);
+					map[str, int] metrics = calculateMetrics(impl);
 					methods += (<impl@src,delAnnotationsRec(impl)>: metrics);
 				}				
 			}			
@@ -67,7 +67,7 @@ private map[str, int] createMetrics(){
 }
 
 //Here we count and set the score for each metric of each method
-private map[str, int] CalculateMetrics(Statement statement)
+private map[str, int] calculateMetrics(Statement statement)
 {
 	map[str, int] result = createMetrics();
 	set[str] unicMethodsCall = {};
