@@ -37,8 +37,9 @@ private void addDeclarationToBucket(Declaration dec)
 /*
 * Identify AST subtree clones
 */
-private set[set[tuple[loc,value]]] calculateSubtreeClones(set[Declaration] AST, int threshold) {
-
+public set[set[tuple[loc,value]]] calculateSubtreeClones(set[Declaration] AST, int threshold) {
+	
+	bucket = ();
 	map[value, list[tuple[loc,value]]] tempClones = ();
 	map[value, list[tuple[loc,value]]] finalClones = ();
 	
@@ -53,19 +54,19 @@ private set[set[tuple[loc,value]]] calculateSubtreeClones(set[Declaration] AST, 
 				switch(dec){
 					case \method(_, _, _, _, Statement impl) :
 					{	
-						if(countStatements1(impl) >= threshold)
+						if(countStatements(impl) >= threshold)
 							addDeclarationToBucket(dec);
 					}	
 					case \constructor(_, _, _ , Statement impl) :
 					{
-						if(countStatements1(impl) >= threshold)
+						if(countStatements(impl) >= threshold)
 							addDeclarationToBucket(dec);
 					}
 				}
 			}
 			case Statement st:
 			{
-				if(countStatements1(st) >= threshold)
+				if(countStatements(st) >= threshold)
 					addStatementToBucket(st);
 			}
 		}

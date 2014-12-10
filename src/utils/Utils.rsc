@@ -66,20 +66,18 @@ public tuple[num, num] calculateClonesMetrics(set[set[tuple[loc,value]]] clones,
 		for (c <- clone)
 			cloneSizes += [calcBlockSize(c[0], model)];
 	}
+	
 	return <sum(cloneSizes), max(cloneSizes)>;
 }
 
 /*
 * Compute the size of a statement
-* TODO : should be improved because the results are not accurate
 */
-
-public num countStatements1(Statement impl){
+public num countStatements(Statement impl){
 	num result = 0;
 		
-		visit (impl){
-			case \block(list[Statement] statements): result += (size(statements));			
-			case \switch(_, list[Statement] statements): result += (size(statements));
+		visit (impl){			
+			case \switch(_,_): result += 1;
 			case \if(_, _):	result += 1;
 			case \if(_, _, _): result += 2;
 			case \while(_, _) : result +=1;
@@ -89,29 +87,21 @@ public num countStatements1(Statement impl){
 			case \for(_, _, _, _) : result +=1;
 			case \try(_, list[Statement] catchClauses): result += size(catchClauses) + 1;
 			case \try(_, list[Statement] catchClauses, _) : result += size(catchClauses) + 2;
+			case \break(): result += 1;
+		    case \break(_): result += 1;
+		    case \continue(): result += 1;
+		    case \continue(_): result += 1;
+		    case \return(_): result += 1;
+		    case \return(): result += 1;
+		    case \case(_): result += 1;
+		    case \defaultCase(): result += 1;
+		    case \synchronizedStatement(_,_): result += 1;
+		    case \throw(_): result += 1;
+		    case \declarationStatement(_): result += 1;
+		    case \expressionStatement(_): result += 1;
+		    case \assert(_): result += 1;
+		    case \assert(_,_): result += 1;
 		}
-	
 	//println(result);
-	return result;
-}
-
-//We count the size of the methods (blocks, statements and so on...)
-public num countStatements2(Statement impl){
-	num result = 0;
-		
-		visit (impl){
-			case \block(list[Statement] statements):
-				result += (size(statements));
-			
-			case \switch(Expression expression, list[Statement] statements):
-				result += (size(statements));
-							
-			case \if(Expression condition, Statement thenBranch):
-				result += 1;
-				
-			case \if(Expression condition, Statement thenBranch, Statement elseBranch):
-				result += 2;
-		}
-	
 	return result;
 }

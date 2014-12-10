@@ -27,7 +27,7 @@ public map[tuple[loc,value], map[str,int]] getMethodsWithMetrics(set[Declaration
 			{	
 				//if the method has more or equal than 5 statements
 				//this is to avoid getters and setters
-				if (countStatements2(impl) >= 5){
+				if (countStatements(impl) >= 5){
 					map[str, int] metrics = calculateMetrics(impl);
 					methods += (<impl@src,delAnnotationsRec(impl)>: metrics);
 				}				
@@ -180,11 +180,13 @@ public set[set[tuple[loc,value]]] getClones(map[tuple[loc,value], map[str,int]] 
 	set[set[tuple[loc,value]]] cloneClassesT1 = {};
 	set[set[tuple[loc,value]]] cloneClassesT2 = {};
 	
+	//tuple[loc,value] m
 	for (m <- methods){
 		
 		set[tuple[loc,value]] classesT1 = {m};
 		set[tuple[loc,value]] classesT2 = {m};
 		
+		//tuple[loc,value] i
 		for (i <- methods){
 		
 			//Whether the tuple M is different than the tuple I
