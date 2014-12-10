@@ -9,7 +9,7 @@ import utils::Utils;
 /*
 * Add a statement to the bucket
 */
-private map[value, list[tuple[loc,value]]] addStatementToBucket(Statement st, map[value, list[tuple[loc,value]]] bucket)
+public map[value, list[tuple[loc,value]]] addStatementToBucket(Statement st, map[value, list[tuple[loc,value]]] bucket)
 {
 	loc source = st@src;
 	s = delAnnotationsRec(st);
@@ -17,14 +17,14 @@ private map[value, list[tuple[loc,value]]] addStatementToBucket(Statement st, ma
 		bucket[s] = [];
 	}
 	bucket[s] += [<source,st>];
-
+	
 	return bucket;
 }
 
 /*
 * Add a declaration to the bucket
 */
-private map[value, list[tuple[loc,value]]] addDeclarationToBucket(Declaration dec,map[value, list[tuple[loc,value]]] bucket)
+public map[value, list[tuple[loc,value]]] addDeclarationToBucket(Declaration dec,map[value, list[tuple[loc,value]]] bucket)
 {
 	loc source = dec@src;
 	d = delAnnotationsRec(dec);

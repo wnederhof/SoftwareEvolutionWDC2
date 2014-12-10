@@ -9,19 +9,54 @@ import lang::java::jdt::m3::Core;
 import clonedetectors::Type1CloneDetector;
 import clonedetectors::Type2CloneDetector;
 import utils::Utils;
+import Main;
 
 loc project = |project://HelloWorld|;
 
-void testAddStatementToBucket(){
-	println("Testing addStatementToBucket...");
+//Test to check addStatement to the bucket
+test bool testAddStatementToBucket(){
 	
-	println("OK!");
+	map[value, list[tuple[loc,value]]] result = ();
+	set[Declaration] ast = createAstsFromEclipseProject(project, true);
+	
+	for (Declaration d <- ast) {
+		visit (d) {
+			case Statement st:{
+				if(countStatements(st) >= 5)
+					result = addStatementToBucket(st, result);
+			}
+		}
+	}
+	
+	return (size(result) == 10);
 }
 
-void testAddDeclarationToBucket(){
-	println("Testing addDeclarationToBucket...");
+//Test to check addDeclaration to the bucket
+test bool testAddDeclarationToBucket(){	
+
+	map[value, list[tuple[loc,value]]] result = ();
+	set[Declaration] ast = createAstsFromEclipseProject(project, true);
 	
-	println("OK!");
+	for (Declaration d <- ast) {
+		visit (d) {
+			case Declaration dec:
+			{
+				switch(dec){
+					case \method(_, _, _, _, Statement impl) :
+					{	
+						if(countStatements(impl) >= 5)
+							result = addDeclarationToBucket(dec, result);
+					}	
+					case \constructor(_, _, _ , Statement impl) :
+					{
+						if(countStatements(impl) >= 5)
+							result = addDeclarationToBucket(dec, result);
+					}
+				}
+			}
+		}
+	}
+	return (size(result) == 8);
 }
 
 //Test to check if the subtree clones are well calculated
@@ -46,7 +81,7 @@ test bool testGetMethods(){
 	return (size(getMethodsWithMetrics(ast)) == 8);
 }
 
-
+//Test to validate CreateMetrics
 test bool testCreateMetrics(){
 	map[str, int] result = ();
 	
@@ -70,6 +105,7 @@ test bool testCreateMetrics(){
 	return (result == createMetrics());
 }
 
+//Test to check the metrics
 test bool testCalculateMetrics(){
 	
 	map[str, int] metrics = ();
@@ -107,6 +143,7 @@ test bool testCalculateMetrics(){
 	return (result == metrics); 
 }
 
+//test validate getClones
 test bool testGetClones(){
 
 	int result = 1;
@@ -231,5 +268,39 @@ test bool testCountStatements(){
 	
 	return (result == statements);
 }
+
+//Main
+test bool testGetClonesExample(){
+	
+	set[Declaration] ast = createAstsFromEclipseProject(project, true);
+	
+	clonesT1 = calculateSubtreeClones(ast,5);
+	clonesT2 = calculateClonesT2(ast, 2);
+	
+	map[int, set[set[tuple[loc,value]]]] allClones = ();
+	allClones[1] = clonesT1;
+	allClones[2] = clonesT2;
+	
+	result = (1:[<"YHello.java","{\n\t\tint i = 0;\n\t\ttry {\n\t\t\ti = 1;\n\t\t} catch (Exception e) {\n\t\t\ti = 2;\n\t\t\tthrow new RuntimeException(e);\n\t\t} catch (OutOfMemoryError e) {\n\t\t\ti = 3;\n\t\t}\n\t\treturn 0;\n\t}">,<"YHello.java","{\n\t\tint i = 0;\n\t\ttry {\n\t\t\ti = 1;\n\t\t} catch (Exception e) {\n\t\t\ti = 2;\n\t\t\tthrow new RuntimeException(e);\n\t\t} catch (OutOfMemoryError e) {\n\t\t\ti = 3;\n\t\t}\n\t\treturn 0;\n\t}">],2:[<"YHello.java","{\n\t\tint i = 0;\n\t\t\n\t\twhile (i \< 10)\n\t\t{\n\t\t\tString j = \"\";\n\t\t\ti = i+1;\n\t\t}\n\t\t\n\t\td();\n\t}">,<"YHello.java","{\n\t\tint j = 0;\n\t\t\n\t\twhile (j \< 10)\n\t\t{\n\t\t\tString k = \"\";\n\t\t\tj = j+1;\n\t\t}\n\t\t\n\t\td();\n\t}">]);
+	return ( getCloneExamples(allClones) == result);
+}
+
+
+test bool testGetCloneMetrics(){
+	
+	set[Declaration] ast = createAstsFromEclipseProject(project, true);
+	
+	clonesT1 = calculateSubtreeClones(ast,5);
+	clonesT2 = calculateClonesT2(ast, 2);
+	
+	map[int, set[set[tuple[loc,value]]]] allClones = ();
+	allClones[1] = clonesT1;
+	allClones[2] = clonesT2;
+	 
+	result = (1:<26.00,1,12,2>,2:<19.00,1,9,2>);
+	return (result == getCloneMetrics(allClones, project));
+
+}
+
 
 

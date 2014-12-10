@@ -23,6 +23,7 @@ public map[int, list[tuple[str,str]]] getCloneExamples(map[int, set[set[tuple[lo
 			break; 
 		}
 	}
+	
 	return cloneExamples;
 }
 
@@ -153,6 +154,7 @@ private str genOutputJson(map[int, set[set[tuple[loc,value]]]] clones, loc proje
 	writeFile(jsonFile, json);
 	return json;
 }
+
 
 public void main(loc project) {
 	
