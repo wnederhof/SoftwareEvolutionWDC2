@@ -3,11 +3,12 @@ module Main
 import clonedetectors::Type1CloneDetector;
 import clonedetectors::Type2CloneDetector;
 import Prelude;
-import utils::LocCalculator;
+import utils::Utils;
 import lang::java::jdt::m3::Core;
+import lang::java::jdt::m3::AST;
 import util::Math;
 
-//TODO somehow integrate in the map also the clone type
+
 private str genOutputJson(map[int, set[set[tuple[loc,value]]]] clones) {
 	
 	/*
@@ -58,7 +59,9 @@ private str genOutputJson(map[int, set[set[tuple[loc,value]]]] clones) {
 }
 
 public void main(loc project) {
-
+	
+	set[Declaration] ast = createAstsFromEclipseProject(project, true);
+	
 	model = createM3FromEclipseProject(project);
 	totalLOCs = calculateVolume(model);
 	
@@ -66,7 +69,7 @@ public void main(loc project) {
 	/*
 	* Type 1 clones
 	*/
-	clonesT1 = calculateClonesT1(project);
+	clonesT1 = calculateClonesT1(ast);
 	num biggestCloneClassT1 = 0;
 	tuple[num, num] cloneMetricsT1 = <0,0>;
 	if(size(clonesT1) > 0){
@@ -85,7 +88,7 @@ public void main(loc project) {
 	/*
 	*Type 2 clones
 	*/
-	clonesT2 = calculateClonesT2(project, 2);
+	clonesT2 = calculateClonesT2(ast, 2);
 	num biggestCloneClassT2 = 0;
 	tuple[num, num] cloneMetricsT2 = <0,0>;
 	if(size(clonesT2) > 0){

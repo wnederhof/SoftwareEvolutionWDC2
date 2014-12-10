@@ -55,10 +55,10 @@ void testType2(){
 test bool testGetMethods(){
 	
 	//loc project = |project://|;
-	set[Declaration] ast = createAstsFromEclipseProject(|project://HelloWorld|, true);
+	set[Declaration] ast = createAstsFromEclipseProject(project, true);
 	
 	//Test project must return XX methods
-	return (getMethodsWithMetrics(ast) == 12);
+	return (size(getMethodsWithMetrics(ast)) == 7);
 }
 
 

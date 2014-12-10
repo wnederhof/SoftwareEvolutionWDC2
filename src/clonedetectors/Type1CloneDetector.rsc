@@ -1,37 +1,12 @@
 module clonedetectors::Type1CloneDetector
+
 import Prelude;
 import lang::java::jdt::m3::AST;
 import Traversal;
 import Node;
-import utils::LocCalculator;
+import utils::Utils;
 
 map[value, list[tuple[loc,value]]] bucket = ();
-
-/*
-* Compute the size of a statement
-* TODO : should be improved because the results are not accurate
-*/
-
-private num countStatements(Statement impl){
-	num result = 0;
-		
-		visit (impl){
-			case \block(list[Statement] statements): result += (size(statements));			
-			case \switch(_, list[Statement] statements): result += (size(statements));
-			case \if(_, _):	result += 1;
-			case \if(_, _, _): result += 2;
-			case \while(_, _) : result +=1;
-			case \do(_, _) : result +=2;
-			case \foreach(_, _, _) : result +=1;
-			case \for(_, _, _) : result += 1;
-			case \for(_, _, _, _) : result +=1;
-			case \try(_, list[Statement] catchClauses): result += size(catchClauses) + 1;
-			case \try(_, list[Statement] catchClauses, _) : result += size(catchClauses) + 2;
-		}
-	
-	//println(result);
-	return result;
-}
 
 /*
 * Add a statement to the bucket
@@ -78,19 +53,19 @@ private set[set[tuple[loc,value]]] calculateSubtreeClones(set[Declaration] AST, 
 				switch(dec){
 					case \method(_, _, _, _, Statement impl) :
 					{	
-						if(countStatements(impl) >= threshold)
+						if(countStatements1(impl) >= threshold)
 							addDeclarationToBucket(dec);
 					}	
 					case \constructor(_, _, _ , Statement impl) :
 					{
-						if(countStatements(impl) >= threshold)
+						if(countStatements1(impl) >= threshold)
 							addDeclarationToBucket(dec);
 					}
 				}
 			}
 			case Statement st:
 			{
-				if(countStatements(st) >= threshold)
+				if(countStatements1(st) >= threshold)
 					addStatementToBucket(st);
 			}
 		}
@@ -142,9 +117,9 @@ private set[set[tuple[loc,value]]] calculateSubtreeClones(set[Declaration] AST, 
 }
 
 
-public set[set[tuple[loc,value]]] calculateClonesT1(loc project) {	
-	set[Declaration] AST = createAstsFromEclipseProject(project, true);
-	set[set[tuple[loc,value]]] clones = calculateSubtreeClones(AST,5);
+public set[set[tuple[loc,value]]] calculateClonesT1(set[Declaration] ast) {	
+	
+	set[set[tuple[loc,value]]] clones = calculateSubtreeClones(ast,5);
 	
 	return clones;
 }

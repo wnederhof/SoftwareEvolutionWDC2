@@ -1,9 +1,10 @@
-module utils::LocCalculator
+module utils::Utils
 
 import lang::java::jdt::m3::Core;
 import IO;
 import String;
 import Prelude;
+import lang::java::jdt::m3::AST;
 
 /*
 * replace comments by white spaces
@@ -66,4 +67,51 @@ public tuple[num, num] calculateClonesMetrics(set[set[tuple[loc,value]]] clones,
 			cloneSizes += [calcBlockSize(c[0], model)];
 	}
 	return <sum(cloneSizes), max(cloneSizes)>;
+}
+
+/*
+* Compute the size of a statement
+* TODO : should be improved because the results are not accurate
+*/
+
+public num countStatements1(Statement impl){
+	num result = 0;
+		
+		visit (impl){
+			case \block(list[Statement] statements): result += (size(statements));			
+			case \switch(_, list[Statement] statements): result += (size(statements));
+			case \if(_, _):	result += 1;
+			case \if(_, _, _): result += 2;
+			case \while(_, _) : result +=1;
+			case \do(_, _) : result +=2;
+			case \foreach(_, _, _) : result +=1;
+			case \for(_, _, _) : result += 1;
+			case \for(_, _, _, _) : result +=1;
+			case \try(_, list[Statement] catchClauses): result += size(catchClauses) + 1;
+			case \try(_, list[Statement] catchClauses, _) : result += size(catchClauses) + 2;
+		}
+	
+	//println(result);
+	return result;
+}
+
+//We count the size of the methods (blocks, statements and so on...)
+public num countStatements2(Statement impl){
+	num result = 0;
+		
+		visit (impl){
+			case \block(list[Statement] statements):
+				result += (size(statements));
+			
+			case \switch(Expression expression, list[Statement] statements):
+				result += (size(statements));
+							
+			case \if(Expression condition, Statement thenBranch):
+				result += 1;
+				
+			case \if(Expression condition, Statement thenBranch, Statement elseBranch):
+				result += 2;
+		}
+	
+	return result;
 }

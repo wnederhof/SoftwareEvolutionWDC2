@@ -3,11 +3,11 @@ module clonedetectors::Type2CloneDetector
 import Prelude;
 import lang::java::jdt::m3::AST;
 import Node;
+import Traversal;
+import utils::Utils;
 
 
-public set[set[tuple[loc,value]]] calculateClonesT2(loc project, int cloneType) {
-	
-	set[Declaration] ast = createAstsFromEclipseProject(project, true);
+public set[set[tuple[loc,value]]] calculateClonesT2(set[Declaration] ast, int cloneType) {
 	
 	map[tuple[loc,value], map[str,int]] methods = getMethodsWithMetrics(ast);
 	
@@ -17,7 +17,7 @@ public set[set[tuple[loc,value]]] calculateClonesT2(loc project, int cloneType) 
 }
 
 //We get the methods that will be processed in order to get clones
-private map[tuple[loc,value], map[str,int]] getMethodsWithMetrics(set[Declaration] ast)
+public map[tuple[loc,value], map[str,int]] getMethodsWithMetrics(set[Declaration] ast)
 {
 	map[tuple[loc,value], map[str,int]] methods = ();
 
@@ -25,7 +25,9 @@ private map[tuple[loc,value], map[str,int]] getMethodsWithMetrics(set[Declaratio
 		visit (d){
 			case \method(Type \return, str name, list[Declaration] parameters, list[Expression] exceptions, Statement impl):
 			{	
-				if (countStatements(impl) >= 5){
+				//if the method has more or equal than 5 statements
+				//this is to avoid getters and setters
+				if (countStatements2(impl) >= 5){
 					map[str, int] metrics = calculateMetrics(impl);
 					methods += (<impl@src,delAnnotationsRec(impl)>: metrics);
 				}				
@@ -37,7 +39,7 @@ private map[tuple[loc,value], map[str,int]] getMethodsWithMetrics(set[Declaratio
 }
 
 //Initializes a map with the metrics and the score
-private map[str, int] createMetrics(){
+public map[str, int] createMetrics(){
 
 	map[str, int] result = ();
 	
@@ -67,7 +69,7 @@ private map[str, int] createMetrics(){
 }
 
 //Here we count and set the score for each metric of each method
-private map[str, int] calculateMetrics(Statement statement)
+public map[str, int] calculateMetrics(Statement statement)
 {
 	map[str, int] result = createMetrics();
 	set[str] unicMethodsCall = {};
@@ -170,7 +172,7 @@ private map[str, int] calculateMetrics(Statement statement)
 }
 
 //Compare the every method in the map to obtain the clones
-private set[set[tuple[loc,value]]] getClones(map[tuple[loc,value], map[str,int]] methods, int cloneType) {
+public set[set[tuple[loc,value]]] getClones(map[tuple[loc,value], map[str,int]] methods, int cloneType) {
 	
 	set[set[tuple[loc,value]]] result = {};	
 	
@@ -230,26 +232,5 @@ private set[set[tuple[loc,value]]] getClones(map[tuple[loc,value], map[str,int]]
 		
 		
 		
-	return result;
-}
-
-//We count the size of the methods (blocks, statements and so on...)
-private num countStatements(Statement impl){
-	num result = 0;
-		
-		visit (impl){
-			case \block(list[Statement] statements):
-				result += (size(statements));
-			
-			case \switch(Expression expression, list[Statement] statements):
-				result += (size(statements));
-							
-			case \if(Expression condition, Statement thenBranch):
-				result += 1;
-				
-			case \if(Expression condition, Statement thenBranch, Statement elseBranch):
-				result += 2;
-		}
-	
 	return result;
 }
