@@ -5,7 +5,7 @@ import Traversal;
 import Node;
 import utils::LocCalculator;
 
-map[value, list[tuple[value,loc]]] bucket = ();
+map[value, list[tuple[loc,value]]] bucket = ();
 
 /*
 * Compute the size of a statement
@@ -43,7 +43,7 @@ private void addStatementToBucket(Statement st)
 	if (s notin bucket) {
 		bucket[s] = [];
 	}
-	bucket[s] += [<st,source>];
+	bucket[s] += [<source,st>];
 }
 
 /*
@@ -56,16 +56,16 @@ private void addDeclarationToBucket(Declaration dec)
 	if (d notin bucket) {
 		bucket[d] = [];
 	}
-	bucket[d] += [<dec,source>];
+	bucket[d] += [<source,dec>];
 }
 
 /*
 * Identify AST subtree clones
 */
-private map[value, list[tuple[value,loc]]] calculateSubtreeClones(set[Declaration] AST, int threshold) {
+private set[set[tuple[loc,value]]] calculateSubtreeClones(set[Declaration] AST, int threshold) {
 
-	map[value, list[tuple[value,loc]]] tempClones = ();
-	map[value, list[tuple[value,loc]]] finalClones = ();
+	map[value, list[tuple[loc,value]]] tempClones = ();
+	map[value, list[tuple[loc,value]]] finalClones = ();
 	
 	/*
 	* Detect all statements or declarations that have a size 
@@ -76,12 +76,12 @@ private map[value, list[tuple[value,loc]]] calculateSubtreeClones(set[Declaratio
 			case Declaration dec:
 			{
 				switch(dec){
-					case \method(Type \return, str name, list[Declaration] parameters, list[Expression] exceptions, Statement impl) :
+					case \method(_, _, _, _, Statement impl) :
 					{	
 						if(countStatements(impl) >= threshold)
 							addDeclarationToBucket(dec);
 					}	
-					case \constructor(str name, list[Declaration] parameters, list[Expression] exceptions, Statement impl) :
+					case \constructor(_, _, _ , Statement impl) :
 					{
 						if(countStatements(impl) >= threshold)
 							addDeclarationToBucket(dec);
@@ -90,7 +90,7 @@ private map[value, list[tuple[value,loc]]] calculateSubtreeClones(set[Declaratio
 			}
 			case Statement st:
 			{
-				if(countStatements(st) >= 5)
+				if(countStatements(st) >= threshold)
 					addStatementToBucket(st);
 			}
 		}
@@ -100,24 +100,20 @@ private map[value, list[tuple[value,loc]]] calculateSubtreeClones(set[Declaratio
 	/*
 	* get all clone classes
 	*/
-	for (s <- bucket){
-		if(size(bucket[s]) > 1) {
+	for (s <- bucket)
+		if(size(bucket[s]) > 1)
 			tempClones[s] = bucket[s];
-			//noOfDupLines += sum([d[1] | d <- bucket[s]]);	
-		}
-	}
 	
 	finalClones = tempClones;
 	
 	/*
 	* remove clone classes that are strictly included in others
 	*/
-	println("clones size <size(tempClones)>");
 	for (c <- tempClones){
-		visit(tempClones[c][0][0]){
+		visit(tempClones[c][0][1]){
 			case Declaration d:
 			{
-				if(d != tempClones[c][0][0]){
+				if(d != tempClones[c][0][1]){
 					d = delAnnotationsRec(d);
 					if(d in finalClones)
 						finalClones = delete(finalClones,d);
@@ -125,7 +121,7 @@ private map[value, list[tuple[value,loc]]] calculateSubtreeClones(set[Declaratio
 			}
 			case Statement s:
 			{
-				if(s != tempClones[c][0][0]){
+				if(s != tempClones[c][0][1]){
 					s = delAnnotationsRec(s);
 					if(s in finalClones)
 						finalClones = delete(finalClones, s);
@@ -134,13 +130,21 @@ private map[value, list[tuple[value,loc]]] calculateSubtreeClones(set[Declaratio
 		}
 	}	
 	
-	return finalClones;
+	set[set[tuple[loc,value]]] clones = {};
+	for(clone <- finalClones){
+		set[tuple[loc,value]] cloneEl = {};
+		for(c <- finalClones[clone])
+			cloneEl += {c};
+		clones += {cloneEl};
+	}
+	
+	return clones;
 }
 
 
-public map[value, list[tuple[value,loc]]] calculateClones(loc project) {	
+public set[set[tuple[loc,value]]] calculateClonesT1(loc project) {	
 	set[Declaration] AST = createAstsFromEclipseProject(project, true);
-	map[value, list[tuple[value,loc]]] clones = calculateSubtreeClones(AST,5);
+	set[set[tuple[loc,value]]] clones = calculateSubtreeClones(AST,5);
 	
 	return clones;
 }

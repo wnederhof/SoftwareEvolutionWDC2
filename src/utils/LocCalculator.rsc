@@ -59,12 +59,11 @@ public num calculateVolume(M3 model) {
 /*
 * calculate the size of the clones
 */
-public tuple[num, num] calculateClonesMetrics(map[value, list[tuple[value,loc]]] clones, M3 model) {
+public tuple[num, num] calculateClonesMetrics(set[set[tuple[loc,value]]] clones, M3 model) {
 	list[num] cloneSizes = [];
 	for(clone <- clones){
-		for (c <- clones[clone])
-			cloneSizes += [calcBlockSize(c[1], model)];
-		//cloneSizes += [sum([calcBlockSize(l,l.offset,l.length ,model) | el <- clones[clone], l <- el[1]])];
+		for (c <- clone)
+			cloneSizes += [calcBlockSize(c[0], model)];
 	}
 	return <sum(cloneSizes), max(cloneSizes)>;
 }

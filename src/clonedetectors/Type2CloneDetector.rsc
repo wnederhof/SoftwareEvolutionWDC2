@@ -5,21 +5,21 @@ import lang::java::jdt::m3::AST;
 import Node;
 
 
-public set[set[tuple[str,loc,value]]] calculateClonesT2(loc project, int cloneType) {
+public set[set[tuple[loc,value]]] calculateClonesT2(loc project, int cloneType) {
 	
 	set[Declaration] ast = createAstsFromEclipseProject(project, true);
 	
-	map[tuple[str,loc,value], map[str,int]] methods = getMethodsWithMetrics(ast);
+	map[tuple[loc,value], map[str,int]] methods = getMethodsWithMetrics(ast);
 	
-	set[set[tuple[str,loc,value]]] clones = getClones(methods, cloneType);
+	set[set[tuple[loc,value]]] clones = getClones(methods, cloneType);
 	
 	return clones;
 }
 
 //We get the methods that will be processed in order to get clones
-private map[tuple[str,loc,value], map[str,int]] getMethodsWithMetrics(set[Declaration] ast)
+private map[tuple[loc,value], map[str,int]] getMethodsWithMetrics(set[Declaration] ast)
 {
-	map[tuple[str,loc,value], map[str,int]] methods = ();
+	map[tuple[loc,value], map[str,int]] methods = ();
 
 	for (Declaration d <- ast) {
 		visit (d){
@@ -27,7 +27,7 @@ private map[tuple[str,loc,value], map[str,int]] getMethodsWithMetrics(set[Declar
 			{	
 				if (countStatements(impl) >= 5){
 					map[str, int] metrics = CalculateMetrics(impl);
-					methods += (<name,impl@src,delAnnotationsRec(impl)>: metrics);
+					methods += (<impl@src,delAnnotationsRec(impl)>: metrics);
 				}				
 			}			
 		}
@@ -170,18 +170,18 @@ private map[str, int] CalculateMetrics(Statement statement)
 }
 
 //Compare the every method in the map to obtain the clones
-private set[set[tuple[str,loc,value]]] getClones(map[tuple[str,loc,value], map[str,int]] methods, int cloneType) {
+private set[set[tuple[loc,value]]] getClones(map[tuple[loc,value], map[str,int]] methods, int cloneType) {
 	
-	set[set[tuple[str,loc,value]]] result = {};	
+	set[set[tuple[loc,value]]] result = {};	
 	
 	//{{a,b},{c,d}} these are clone classes {a,b} and {c,d}
-	set[set[tuple[str,loc,value]]] cloneClassesT1 = {};
-	set[set[tuple[str,loc,value]]] cloneClassesT2 = {};
+	set[set[tuple[loc,value]]] cloneClassesT1 = {};
+	set[set[tuple[loc,value]]] cloneClassesT2 = {};
 	
 	for (m <- methods){
 		
-		set[tuple[str,loc,value]] classesT1 = {m};
-		set[tuple[str,loc,value]] classesT2 = {m};
+		set[tuple[loc,value]] classesT1 = {m};
+		set[tuple[loc,value]] classesT2 = {m};
 		
 		for (i <- methods){
 		
@@ -190,7 +190,7 @@ private set[set[tuple[str,loc,value]]] getClones(map[tuple[str,loc,value], map[s
 			if (m != i)
 			{
 				//Type I (if needed) compares the content of the method
-				if (m[2] == i[2])
+				if (m[1] == i[1])
 					classesT1 += i;
 				
 				//Type II compares the metrics of the methods
