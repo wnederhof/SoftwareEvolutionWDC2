@@ -49,7 +49,6 @@ public map[str, int] createMetrics(){
 	result += ("callsToOtherFunctions":0);
 	result += ("uniqueCallsToOtherFunctions":0);
 	
-	result += ("arcs":0);
 	result += ("exit":0); // breaks and returns.
 	
 	//declaration statements + executable statements
@@ -212,19 +211,6 @@ public set[set[tuple[loc,value]]] getClones(map[tuple[loc,value], map[str,int]] 
 			cloneClassesT2 += {classesT2};
 
 	}
-	
-
-	/*println("number of T1s : <size(cloneClassesT1)>");
-	for (c <- cloneClassesT1){
-		println("size of C1 <size(c)>");
-	}
-			
-		
-	println("number of T2s : <size(cloneClassesT2)>");	
-	for (c <- cloneClassesT2){
-		println("size of C2 <size(c)>");
-	}
-	*/
 	
 	//Returning code clones of the type needed
 	if (cloneType == 1)

@@ -56,7 +56,6 @@ test bool testAddDeclarationToBucket(){
 			}
 		}
 	}
-	println(size(result));
 	return (size(result) == 8);
 }
 
@@ -66,7 +65,6 @@ test bool testCalculateSubtreeClones(){
 	num result = 1;
 	set[Declaration] ast = createAstsFromEclipseProject(project, true);
 	
-	println(size(calculateSubtreeClones(ast,5)));
 	return (size(calculateSubtreeClones(ast,5)) == result); 
 	
 }
@@ -91,7 +89,6 @@ test bool testCreateMetrics(){
 	result += ("executableStatements":0);
 	result += ("callsToOtherFunctions":0);
 	result += ("uniqueCallsToOtherFunctions":0);
-	result += ("arcs":0);
 	result += ("exit":0);
 	result += ("statements":0);
 	result += ("if":0);
@@ -125,7 +122,7 @@ test bool testCalculateMetrics(){
 	}
 	
 	map[str, int] result = ();
-	result = ("arcs":0,
+	result = (
 	"statements":15,
 	"for":1,
 	"do":0,
