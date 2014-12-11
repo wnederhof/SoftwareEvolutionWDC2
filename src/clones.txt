@@ -1,0 +1,3050 @@
+Type 1 clones:
+
+
+Clone class
+File: TestDataTypes.java
+Clone source code:
+public void tearDown(){
+        try{
+            Connection con = AllTests.getConnection();
+            Statement st = con.createStatement();
+            st.execute("drop table " + table);
+            st.close();
+        }catch(Throwable e){
+            //e.printStackTrace();
+        }
+    }
+
+File: TestFunctions.java
+Clone source code:
+public void tearDown(){
+        try{
+            Connection con = AllTests.getConnection();
+            Statement st = con.createStatement();
+            st.execute("drop table " + table);
+            st.close();
+        }catch(Throwable e){
+            //e.printStackTrace();
+        }
+    }
+
+File: TestMoneyRounding.java
+Clone source code:
+public void tearDown(){
+        try{
+            Connection con = AllTests.getConnection();
+            Statement st = con.createStatement();
+            st.execute("drop table " + table);
+            st.close();
+        }catch(Throwable e){
+            //e.printStackTrace();
+        }
+    }
+
+File: TestOperatoren.java
+Clone source code:
+public void tearDown(){
+        try{
+            Connection con = AllTests.getConnection();
+            Statement st = con.createStatement();
+            st.execute("drop table " + table);
+            st.close();
+        }catch(Throwable e){
+            //e.printStackTrace();
+        }
+    }
+
+Clone class
+File: Table.java
+Clone source code:
+if(serializeConnections.size() > 0){
+							Iterator values = locks.values().iterator();
+							while(values.hasNext()){
+								TableStorePage lock = (TableStorePage)values.next();
+								if(lock.con != con) return null;
+							}
+						}
+
+File: Table.java
+Clone source code:
+if(serializeConnections.size() > 0){
+                        Iterator values = locks.values().iterator();
+                        while(values.hasNext()){
+                            TableStorePage lock = (TableStorePage)values.next();
+                            if(lock.con != con) return null;
+                        }
+                    }
+
+Clone class
+File: TestJoins.java
+Clone source code:
+private static TestValue a(String dataType, Object small, Object large){
+        TestValue value = new TestValue();
+        value.dataType  = dataType;
+        value.small     = small;
+        value.large     = large;
+        return value;
+    }
+
+File: TestOperatoren.java
+Clone source code:
+private static TestValue a(String dataType, Object small, Object large){
+        TestValue value = new TestValue();
+        value.dataType  = dataType;
+        value.small     = small;
+        value.large     = large;
+        return value;
+    }
+
+Clone class
+File: TestOrderBy.java
+Clone source code:
+while(rs.next()){
+			String newValue = rs.getString("v");
+			assertTrue( oldValue.compareTo( newValue ) < 0 );
+			oldValue = newValue;
+			count++;
+		}
+
+File: TestOrderBy.java
+Clone source code:
+while(rs.next()){
+			String newValue = rs.getString("v");
+			assertTrue( oldValue.compareTo( newValue ) < 0 );
+			oldValue = newValue;
+			count++;
+		}
+
+Clone class
+File: Utils.java
+Clone source code:
+static String bytes2hex( byte[] bytes ){
+        StringBuffer buf = new StringBuffer(bytes.length << 1);
+        for(int i=0; i<bytes.length; i++){
+            buf.append( digits[ (bytes[i] >> 4) & 0x0F ] );
+            buf.append( digits[ (bytes[i]     ) & 0x0F ] );
+        }
+        return buf.toString();
+    }
+
+File: BasicTestCase.java
+Clone source code:
+private static String bytes2hex( byte[] bytes ){
+		StringBuffer buf = new StringBuffer(bytes.length << 1);
+		for(int i=0; i<bytes.length; i++){
+			buf.append( digits[ (bytes[i] >> 4) & 0x0F ] );
+			buf.append( digits[ (bytes[i]     ) & 0x0F ] );
+		}
+		return buf.toString();
+	}
+
+Clone class
+File: GroupResult.java
+Clone source code:
+{
+			int idx = internalExpressions.indexOf(expr);
+			if(idx >= 0) return idx;
+			internalExpressions.add(expr);
+			return internalExpressions.size()-1;
+		}
+
+File: GroupResult.java
+Clone source code:
+{
+			int idx = internalExpressions.indexOf(expr);
+			if(idx >= 0) return idx;
+			internalExpressions.add(expr);
+			return internalExpressions.size()-1;
+		}
+
+Clone class
+File: SQLParser.java
+Clone source code:
+try{
+						int maxRows = Integer.parseInt(token.getName(sql));
+						selCmd.setMaxRows(maxRows);
+					}catch(NumberFormatException e){
+						throw createSyntaxError(token, Language.STXADD_NOT_NUMBER, token.getName(sql));
+					}
+
+File: SQLParser.java
+Clone source code:
+try{
+            int maxRows = Integer.parseInt(token.getName(sql));
+            selCmd.setMaxRows(maxRows);
+        }catch(NumberFormatException e){
+            throw createSyntaxError(token, Language.STXADD_NOT_NUMBER, token.getName(sql));
+        }
+
+Clone class
+File: TestOrderBy.java
+Clone source code:
+while(oldValue != null && rs.next()){
+			String newValue = rs.getString("v");
+			if(newValue != null){
+				assertTrue( oldValue.compareTo( newValue ) > 0 );
+				count++;
+			}
+			oldValue = newValue;
+		}
+
+File: TestOrderBy.java
+Clone source code:
+while(oldValue != null && rs.next()){
+			String newValue = rs.getString("v");
+			if(newValue != null){
+				assertTrue( oldValue.compareTo( newValue ) > 0 );
+				count++;
+			}
+			oldValue = newValue;
+		}
+
+Clone class
+File: BenchTest.java
+Clone source code:
+// There are not the correct count of rows.
+                if (count == 0){
+                    createTestDataWithClassicInsert( con );
+                    rs = st1.executeQuery( "SELECT count(*) FROM " + tableName);
+                    rs.next();
+                    count = rs.getInt(1);
+                }
+
+File: BenchTest.java
+Clone source code:
+// There are not the correct count of rows.
+                if (count == 0){
+                    createTestDataWithClassicInsert( con );
+                    rs = st1.executeQuery( "SELECT count(*) FROM " + tableName);
+                    rs.next();
+                    count = rs.getInt(1);
+                }
+
+Clone class
+File: TestScrollable.java
+Clone source code:
+try{
+            rs.getString("v");
+            fail("SQLException 'No current row' should be throw");
+        }catch(SQLException ex){
+            assertSQLException("01000", 0, ex);
+        }
+
+File: TestScrollable.java
+Clone source code:
+try{
+            rs.getString("v");
+            fail("SQLException 'No current row' should be throw");
+        }catch(SQLException ex){
+            assertSQLException("01000", 0, ex);
+        }
+
+File: TestScrollable.java
+Clone source code:
+try{
+            rs.getString("v");
+            fail("SQLException 'No current row' should be throw");
+        }catch(SQLException ex){
+            assertSQLException( "01000", 0, ex);
+        }
+
+File: TestScrollable.java
+Clone source code:
+try{
+            rs.getString("v");
+            fail("SQLException 'No current row' should be throw");
+        }catch(SQLException ex){
+            assertSQLException( "01000", 0, ex );
+        }
+
+Clone class
+File: TestTransactions.java
+Clone source code:
+{
+			try{
+				con.createStatement().execute("Drop Table transactions");
+			}catch(Throwable e){e.printStackTrace();}
+			con.setAutoCommit(true);
+		}
+
+File: TestTransactions.java
+Clone source code:
+{
+			try{
+				con.createStatement().execute("Drop Table transactions");
+			}catch(Throwable e){e.printStackTrace();}
+			con.setAutoCommit(true);
+		}
+
+File: TestTransactions.java
+Clone source code:
+{
+			try{
+				con.createStatement().execute("Drop Table transactions");
+			}catch(Throwable e){e.printStackTrace();}
+			con.setAutoCommit(true);
+		}
+
+File: TestTransactions.java
+Clone source code:
+{
+			try{
+				con.createStatement().execute("Drop Table transactions");
+			}catch(Throwable e){e.printStackTrace();}
+			con.setAutoCommit(true);
+		}
+
+File: TestTransactions.java
+Clone source code:
+{
+			try{
+				con.createStatement().execute("Drop Table transactions");
+			}catch(Throwable e){e.printStackTrace();}
+			con.setAutoCommit(true);
+		}
+
+File: TestTransactions.java
+Clone source code:
+{
+			try{
+				con.createStatement().execute("Drop Table transactions");
+			}catch(Throwable e){e.printStackTrace();}
+			con.setAutoCommit(true);
+		}
+
+Clone class
+File: TableView.java
+Clone source code:
+catch(Throwable e){
+			if(raFile != null)
+				try{
+					raFile.close();
+				}catch(Exception e2){
+					DriverManager.println(e2.toString());
+				}
+			throw SmallSQLException.createFromException(e);
+		}
+
+File: IndexDescription.java
+Clone source code:
+catch(Throwable e){
+            if(raFile != null)
+                try{
+                    raFile.close();
+                }catch(Exception e2){
+                    DriverManager.println(e2.toString());
+                }
+            throw SmallSQLException.createFromException(e);
+        }
+
+Clone class
+File: ExpressionFunctionTruncate.java
+Clone source code:
+if(places > 0){
+			for(int i=0; i<places; i++){
+				factor *= 10;
+			}
+			value *= factor;
+		}else{
+			for(int i=0; i>places; i--){
+				factor *= 10;
+			}
+			value /= factor;
+		}
+
+File: ExpressionFunctionRound.java
+Clone source code:
+if(places > 0){
+			for(int i=0; i<places; i++){
+				factor *= 10;
+			}
+			value *= factor;
+		}else{
+			for(int i=0; i>places; i--){
+				factor *= 10;
+			}
+			value /= factor;
+		}
+
+Clone class
+File: IndexScrollStatus.java
+Clone source code:
+if(status.nodeValue != null){
+						if(status.nodeValue instanceof IndexNode){
+							level++;
+							nodeStack.push(
+								new IndexNodeScrollStatus( 	(IndexNode)status.nodeValue, 
+														(expressions.get(level).getAlias() != SQLTokenizer.DESC_STR), 
+														scroll, level));
+							continue;
+						}else
+							return getReturnValue(status.nodeValue);
+					}
+
+File: IndexScrollStatus.java
+Clone source code:
+if(status.nodeValue != null){
+						if(status.nodeValue instanceof IndexNode){
+							level++;
+							nodeStack.push(
+								new IndexNodeScrollStatus( 	(IndexNode)status.nodeValue, 
+														(expressions.get(level).getAlias() != SQLTokenizer.DESC_STR), 
+														scroll, level));
+							continue;
+						}else
+							return getReturnValue(status.nodeValue);
+					}
+					//There is no RowOffset in this node
+
+Clone class
+File: SSCallableStatement.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(i);
+            wasNull = expr.isNull();
+            return expr.getLong();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSCallableStatement.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(i);
+            wasNull = expr.isNull();
+            return expr.getLong();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+Clone class
+File: MutableNumeric.java
+Clone source code:
+if(num.scale < scale){
+			num.setScale(scale);
+		}else
+		if(num.scale > scale){
+			setScale(num.scale);
+		}
+
+File: MutableNumeric.java
+Clone source code:
+if(num.scale < scale){
+			num.setScale(scale);
+		}else
+		if(num.scale > scale){
+			setScale(num.scale);
+		}
+
+Type 2 clones:
+
+
+Clone class
+File: StoreImpl.java
+Clone source code:
+{
+        this.offset = valueOffset;
+        if(readBoolean()) return 0;
+        switch(dataType){
+            case SQLTokenizer.BIT:
+            case SQLTokenizer.BOOLEAN:
+                    return readBoolean() ? 1 : 0;
+            case SQLTokenizer.BINARY:
+            case SQLTokenizer.VARBINARY:
+                    return Utils.bytes2float( readBinary() );
+            case SQLTokenizer.TINYINT:
+                    return readUnsignedByte();
+            case SQLTokenizer.SMALLINT:
+                    return readShort();
+            case SQLTokenizer.INT:
+                    return readInt();
+            case SQLTokenizer.BIGINT:
+                    return readLong();
+            case SQLTokenizer.REAL:
+                    return readFloat();
+            case SQLTokenizer.FLOAT:
+            case SQLTokenizer.DOUBLE:
+                    return (float)readDouble();
+            case SQLTokenizer.MONEY:
+                    return readLong() / (float)10000.0;
+            case SQLTokenizer.SMALLMONEY:
+                    return readInt() / (float)10000.0;
+            case SQLTokenizer.NUMERIC:
+            case SQLTokenizer.DECIMAL:
+                    return readNumeric().floatValue();
+            case SQLTokenizer.CHAR:
+            case SQLTokenizer.NCHAR:
+            case SQLTokenizer.VARCHAR:
+            case SQLTokenizer.NVARCHAR:
+                    return Float.parseFloat( readString() );
+			case SQLTokenizer.CLOB:
+			case SQLTokenizer.NCLOB:
+            case SQLTokenizer.LONGNVARCHAR:
+            case SQLTokenizer.LONGVARCHAR:
+                    return Float.parseFloat( readLongString() );
+            case SQLTokenizer.JAVA_OBJECT:
+                    ByteArrayInputStream bais = new ByteArrayInputStream(readLongBinary());
+                    ObjectInputStream ois = new ObjectInputStream(bais);
+                    return Float.parseFloat( ois.readObject().toString() );
+            case SQLTokenizer.LONGVARBINARY:
+            case SQLTokenizer.BLOB:
+                    return Utils.bytes2float( readLongBinary() );
+			case SQLTokenizer.TIMESTAMP:
+					return readTimestamp();
+			case SQLTokenizer.TIME:
+					return readTime();
+			case SQLTokenizer.DATE:
+					return readDate();
+			case SQLTokenizer.SMALLDATETIME:
+					return readSmallDateTime();
+			default:
+				throw SmallSQLException.create(Language.VALUE_CANT_CONVERT, new Object[] { SQLTokenizer.getKeyWord(dataType), "REAL" });
+        }
+    }
+
+File: StoreImpl.java
+Clone source code:
+{
+        this.offset = valueOffset;
+        if(readBoolean()) return 0;
+        switch(dataType){
+            case SQLTokenizer.BIT:
+            case SQLTokenizer.BOOLEAN:
+                    return readBoolean() ? 1 : 0;
+            case SQLTokenizer.BINARY:
+            case SQLTokenizer.VARBINARY:
+                    return Utils.bytes2double( readBinary() );
+            case SQLTokenizer.TINYINT:
+                    return readUnsignedByte();
+            case SQLTokenizer.SMALLINT:
+                    return readShort();
+            case SQLTokenizer.INT:
+                    return readInt();
+            case SQLTokenizer.BIGINT:
+                    return readLong();
+            case SQLTokenizer.REAL:
+                    return readFloat();
+            case SQLTokenizer.FLOAT:
+            case SQLTokenizer.DOUBLE:
+                    return readDouble();
+            case SQLTokenizer.MONEY:
+                    return readLong() / 10000.0;
+            case SQLTokenizer.SMALLMONEY:
+                    return readInt() / 10000.0;
+            case SQLTokenizer.NUMERIC:
+            case SQLTokenizer.DECIMAL:
+                    return readNumeric().doubleValue();
+            case SQLTokenizer.CHAR:
+            case SQLTokenizer.NCHAR:
+            case SQLTokenizer.VARCHAR:
+            case SQLTokenizer.NVARCHAR:
+                    return Double.parseDouble( readString() );
+			case SQLTokenizer.CLOB:
+			case SQLTokenizer.NCLOB:
+            case SQLTokenizer.LONGNVARCHAR:
+            case SQLTokenizer.LONGVARCHAR:
+                    return Double.parseDouble( readLongString() );
+            case SQLTokenizer.JAVA_OBJECT:
+                    ByteArrayInputStream bais = new ByteArrayInputStream(readLongBinary());
+                    ObjectInputStream ois = new ObjectInputStream(bais);
+                    return Double.parseDouble( ois.readObject().toString() );
+            case SQLTokenizer.LONGVARBINARY:
+            case SQLTokenizer.BLOB:
+                    return Utils.bytes2double( readLongBinary() );
+			case SQLTokenizer.TIMESTAMP:
+					return readTimestamp();
+			case SQLTokenizer.TIME:
+					return readTime();
+			case SQLTokenizer.DATE:
+					return readDate();
+			case SQLTokenizer.SMALLDATETIME:
+					return readSmallDateTime();
+			default:
+				throw SmallSQLException.create(Language.VALUE_CANT_CONVERT, new Object[] { SQLTokenizer.getKeyWord(dataType), "NUMERIC" });
+        }
+    }
+
+File: StoreImpl.java
+Clone source code:
+{
+        this.offset = valueOffset;
+        if(readBoolean()) return 0;
+        switch(dataType){
+            case SQLTokenizer.BIT:
+            case SQLTokenizer.BOOLEAN:
+                    return readBoolean() ? 1 : 0;
+            case SQLTokenizer.BINARY:
+            case SQLTokenizer.VARBINARY:
+                    return Utils.bytes2long( readBinary() );
+            case SQLTokenizer.TINYINT:
+                    return readUnsignedByte();
+            case SQLTokenizer.SMALLINT:
+                    return readShort();
+            case SQLTokenizer.INT:
+                    return readInt();
+            case SQLTokenizer.BIGINT:
+                    return readLong();
+            case SQLTokenizer.REAL:
+                    return (long)readFloat();
+            case SQLTokenizer.FLOAT:
+            case SQLTokenizer.DOUBLE:
+                    return (long)readDouble();
+            case SQLTokenizer.MONEY:
+                    return readLong() / 10000;
+            case SQLTokenizer.SMALLMONEY:
+                    return readInt() / 10000;
+            case SQLTokenizer.NUMERIC:
+            case SQLTokenizer.DECIMAL:
+                    return readNumeric().longValue();
+            case SQLTokenizer.CHAR:
+            case SQLTokenizer.NCHAR:
+            case SQLTokenizer.VARCHAR:
+            case SQLTokenizer.NVARCHAR:
+                    return Long.parseLong( readString() );
+			case SQLTokenizer.CLOB:
+			case SQLTokenizer.NCLOB:
+            case SQLTokenizer.LONGNVARCHAR:
+            case SQLTokenizer.LONGVARCHAR:
+                    return Long.parseLong( readLongString() );
+            case SQLTokenizer.JAVA_OBJECT:
+                    ByteArrayInputStream bais = new ByteArrayInputStream(readLongBinary());
+                    ObjectInputStream ois = new ObjectInputStream(bais);
+                    return ExpressionValue.getLong( ois.readObject().toString(), SQLTokenizer.VARCHAR );
+            case SQLTokenizer.LONGVARBINARY:
+            case SQLTokenizer.BLOB:
+                    return Utils.bytes2long( readLongBinary() );
+			case SQLTokenizer.TIMESTAMP:
+					return readTimestamp();
+			case SQLTokenizer.TIME:
+					return readTime();
+			case SQLTokenizer.DATE:
+					return readDate();
+			case SQLTokenizer.SMALLDATETIME:
+					return readSmallDateTime();
+			default:
+				throw SmallSQLException.create(Language.VALUE_CANT_CONVERT, new Object[] { SQLTokenizer.getKeyWord(dataType), "BIGINT" });
+        }
+    }
+
+Clone class
+File: Utils.java
+Clone source code:
+{
+        int result = 0;
+        int length = Math.min( 4, bytes.length);
+        for(int i=0; i<length; i++){
+            result = (result << 8) | (bytes[i] & 0xFF);
+        }
+        return result;
+    }
+
+File: Utils.java
+Clone source code:
+{
+        long result = 0;
+        int length = Math.min( 8, bytes.length);
+        for(int i=0; i<length; i++){
+            result = (result << 8) | (bytes[i] & 0xFF);
+        }
+        return result;
+    }
+
+Clone class
+File: Index.java
+Clone source code:
+{
+		if(src1 == null) return false;
+		int length = src1.length;
+		if(length != src2.length - offset2) return false;
+		for(int i=0; i<length; i++){
+			if(src1[i] != src2[i+offset2]) return false;
+		}
+		return true;
+	}
+
+File: Index.java
+Clone source code:
+{
+		if(src1 == null) return false;
+		int length = src1.length;
+		if(length != charCount) return false;
+		for(int i=0, d = charCount-1; i<length; i++){
+			if(src1[i] != (char)((src2 >> (d-- << 4)))) return false;
+		}
+		return true;
+	}
+
+Clone class
+File: TestTransactions.java
+Clone source code:
+{
+		Connection con1 = AllTests.getConnection();
+		Connection con2 = AllTests.createConnection();
+		try{		
+			con2.setTransactionIsolation( Connection.TRANSACTION_READ_COMMITTED );
+			con1.createStatement().execute("Create Table transactions (i int identity, v varchar(20))");
+			assertRowCount( 0, "Select * from transactions");
+
+			con1.setAutoCommit(false);
+			con1.createStatement().execute("Insert Into transactions(v) Values('qwert2')");
+
+			ResultSet rs2 = con2.createStatement().executeQuery("Select count(*) from transactions");
+			assertTrue( rs2.next() );
+			assertEquals( 0, rs2.getInt(1) );
+		}finally{
+            dropTable(con1, "transactions");
+			con1.setAutoCommit(true);
+			con2.close();
+		}
+	}
+
+File: TestTransactions.java
+Clone source code:
+{
+		Connection con1 = AllTests.getConnection();
+		Connection con2 = AllTests.createConnection();
+		try{		
+			con2.setTransactionIsolation( Connection.TRANSACTION_READ_UNCOMMITTED );
+			con1.createStatement().execute("Create Table transactions (i int identity, v varchar(20))");
+			assertRowCount( 0, "Select * from transactions");
+
+			con1.setAutoCommit(false);
+			con1.createStatement().execute("Insert Into transactions(v) Values('qwert2')");
+
+			ResultSet rs2 = con2.createStatement().executeQuery("Select count(*) from transactions");
+			assertTrue( rs2.next() );
+			assertEquals( 1, rs2.getInt(1) );
+		}finally{
+		    dropTable(con1, "transactions");
+			con1.setAutoCommit(true);
+			con2.close();
+		}
+	}
+
+Clone class
+File: StoreImpl.java
+Clone source code:
+{
+        int newSize = offset + length;
+        if(newSize > page.length) resizePage(newSize );
+        System.arraycopy( daten, off, page, offset, length);
+        offset += length;
+    }
+
+File: StoreImpl.java
+Clone source code:
+{
+        int newSize = offset + daten.length;
+        if(newSize > page.length) resizePage(newSize );
+        System.arraycopy( daten, 0, page, offset, daten.length);
+        offset += daten.length;
+    }
+
+Clone class
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(columnIndex);
+            wasNull = expr.isNull();
+            return expr.getInt();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSCallableStatement.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(i);
+            wasNull = expr.isNull();
+            return expr.getFloat();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(columnIndex);
+            wasNull = expr.isNull();
+            return expr.getDouble();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSCallableStatement.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(i);
+            wasNull = expr.isNull();
+            return expr.getBoolean();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSCallableStatement.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(i);
+            wasNull = expr.isNull();
+            return expr.getInt();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(columnIndex);
+            wasNull = expr.isNull();
+            return expr.getBoolean();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(columnIndex);
+            wasNull = expr.isNull();
+            return expr.getFloat();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(columnIndex);
+            wasNull = expr.isNull();
+            return expr.getLong();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSCallableStatement.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(i);
+            wasNull = expr.isNull();
+            return expr.getLong();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+Clone class
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+            if(cal == null){
+                return getTimestamp(columnIndex);
+            }
+            Expression expr = getValue(columnIndex);
+            wasNull = expr.isNull();
+            if(wasNull) return null;
+            return new Timestamp(DateTime.addDateTimeOffset( expr.getLong(), cal.getTimeZone() ));
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+            if(cal == null){
+                return getTime(columnIndex);
+            }
+            Expression expr = getValue(columnIndex);
+            wasNull = expr.isNull();
+            if(wasNull) return null;
+            return new Time(DateTime.addDateTimeOffset( expr.getLong(), cal.getTimeZone() ));
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+            if(cal == null){
+                return getDate(columnIndex);
+            }
+            Expression expr = getValue(columnIndex);
+            wasNull = expr.isNull();
+            if(wasNull) return null;
+            return new Date(DateTime.addDateTimeOffset( expr.getLong(), cal.getTimeZone() ));
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+Clone class
+File: TestGroupBy.java
+Clone source code:
+{
+		init();
+		Connection con = AllTests.getConnection();
+		PreparedStatement pr = con.prepareStatement("Select count(*) FROM " + table1 + " Group By name Order By name DESC");
+		for(int i=1; i<=3; i++){
+			ResultSet rs = pr.executeQuery( );
+			assertTrue  ( "loop:"+i, rs.next());
+			assertEquals( "loop:"+i, 1, rs.getInt(1));
+			assertTrue  ( "loop:"+i, rs.next());
+			assertEquals( "loop:"+i, 3, rs.getInt(1));
+		}
+	}
+
+File: TestGroupBy.java
+Clone source code:
+{
+		init();
+		Connection con = AllTests.getConnection();
+		PreparedStatement pr = con.prepareStatement("Select abs(sum(abs(3-id))+2) FROM " + table1 + " Group By name+'a' Order By 'b'+(Name+'a')");
+		for(int i=1; i<=3; i++){
+			ResultSet rs = pr.executeQuery( );
+			assertTrue  ( "loop:"+i, rs.next());
+			assertEquals( "loop:"+i, 5, rs.getInt(1));
+			assertTrue  ( "loop:"+i, rs.next());
+			assertEquals( "loop:"+i, 4, rs.getInt(1));
+		}
+	}
+
+Clone class
+File: Utils.java
+Clone source code:
+{
+		if(value > Long.MAX_VALUE)
+			return Long.MAX_VALUE;
+		if(value < Long.MIN_VALUE)
+			return Long.MIN_VALUE;
+		return (long)value;
+	}
+
+File: Utils.java
+Clone source code:
+{
+		if(value > Integer.MAX_VALUE)
+			return Integer.MAX_VALUE;
+		if(value < Integer.MIN_VALUE)
+			return Integer.MIN_VALUE;
+		return (int)value;
+	}
+
+File: Utils.java
+Clone source code:
+{
+		if (value < Integer.MIN_VALUE) return Integer.MIN_VALUE;
+		else if (value > Integer.MAX_VALUE) return Integer.MAX_VALUE;
+		else return (int) value;
+	}
+
+Clone class
+File: IndexNode.java
+Clone source code:
+{
+		if(start == end) return start;
+		int mid = start + (end - start)/2;
+		char nodeDigit = nodes[mid].digit;
+		if(nodeDigit == digit) return mid;
+		if(nodeDigit < digit){
+			return findNodeInsertPos( digit, mid+1, end );
+		}else{
+			if(start == mid) return start;
+			return findNodeInsertPos( digit, start, mid );
+		}
+	}
+
+File: IndexNode.java
+Clone source code:
+{
+		if(start == nodes.length) return -1;
+		int mid = start + (end - start)/2;
+		char nodeDigit = nodes[mid].digit;
+		if(nodeDigit == digit) return mid;
+		if(nodeDigit < digit){
+			return findNodePos( digit, mid+1, end );
+		}else{
+			if(start == mid) return -1;
+			return findNodePos( digit, start, mid-1 );
+		}
+	}
+
+Clone class
+File: Where.java
+Clone source code:
+{
+        boolean oldIsCurrentRow = isCurrentRow;
+		do{
+			isCurrentRow = rowSource.next();
+		}while(isCurrentRow && !isValidRow());
+		if(oldIsCurrentRow || isCurrentRow) row++;
+		return isCurrentRow;
+	}
+
+File: Where.java
+Clone source code:
+{
+        boolean oldIsCurrentRow = isCurrentRow;
+		do{
+			isCurrentRow = rowSource.previous();
+		}while(isCurrentRow && !isValidRow());
+		if(oldIsCurrentRow || isCurrentRow) row--;
+		return isCurrentRow;
+	}
+
+Clone class
+File: TestOrderBy.java
+Clone source code:
+{
+		init();
+		Connection con = AllTests.getConnection();
+		Statement st = con.createStatement();
+		ResultSet rs;
+		String oldValue;
+		
+		rs = st.executeQuery("SELECT * FROM " + table1 + " ORDER  by v desc, i asc");
+		
+		assertTrue( rs.next() );
+		oldValue = rs.getString("v");
+		
+		int count = 1;
+		while(oldValue != null && rs.next()){
+			String newValue = rs.getString("v");
+			if(newValue != null){
+				assertTrue( oldValue.compareTo( newValue ) > 0 );
+				count++;
+			}
+			oldValue = newValue;
+		}
+		assertNull(oldValue);
+		assertFalse( rs.next() );
+
+		assertEquals( valueCount, count );
+	}
+
+File: TestOrderBy.java
+Clone source code:
+{
+		init();
+		Connection con = AllTests.getConnection();
+		Statement st = con.createStatement();
+		ResultSet rs;
+		String oldValue;
+		
+		rs = st.executeQuery("SELECT * FROM " + table1 + " ORDER  by v desc");
+		
+		assertTrue( rs.next() );
+		oldValue = rs.getString("v");
+		
+		int count = 1;
+		while(oldValue != null && rs.next()){
+			String newValue = rs.getString("v");
+			if(newValue != null){
+				assertTrue( oldValue.compareTo( newValue ) > 0 );
+				count++;
+			}
+			oldValue = newValue;
+		}
+		assertNull(oldValue);
+		assertFalse( rs.next() );
+
+		assertEquals( valueCount, count );
+	}
+
+File: TestOrderBy.java
+Clone source code:
+{
+		init();
+		Connection con = AllTests.getConnection();
+		Statement st = con.createStatement();
+		ResultSet rs;
+		Integer oldValue;
+		
+		rs = st.executeQuery("SELECT * FROM " + table1 + " ORDER  by i Desc");
+		
+		assertTrue( rs.next() );
+		oldValue = (Integer)rs.getObject("i");
+		
+		int count = 1;
+		while(oldValue != null && rs.next()){
+			Integer newValue = (Integer)rs.getObject("i");
+			if(newValue != null){
+				assertTrue( oldValue.compareTo( newValue ) > 0 );
+				count++;
+			}
+			oldValue = newValue;
+		}
+		assertNull(oldValue);
+		assertFalse( rs.next() );
+		assertEquals( valueCount, count );
+	}
+
+Clone class
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(columnIndex);
+            wasNull = expr.isNull();
+            return expr.getInt();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSCallableStatement.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(i);
+            wasNull = expr.isNull();
+            return expr.getFloat();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(columnIndex);
+            wasNull = expr.isNull();
+            return expr.getDouble();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSCallableStatement.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(i);
+            wasNull = expr.isNull();
+            return expr.getBoolean();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSCallableStatement.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(i);
+            wasNull = expr.isNull();
+            return expr.getInt();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSCallableStatement.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(i);
+            wasNull = expr.isNull();
+            return expr.getLong();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(columnIndex);
+            wasNull = expr.isNull();
+            return expr.getBoolean();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(columnIndex);
+            wasNull = expr.isNull();
+            return expr.getFloat();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(columnIndex);
+            wasNull = expr.isNull();
+            return expr.getLong();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+Clone class
+File: Language.java
+Clone source code:
+{
+		Set inserted = new HashSet(); // for duplicates checking
+		
+		for (int i = 0; i < entries.length; i++) {
+			String key = entries[i][0];
+			
+			if (! inserted.add(key)) {
+				throw new IllegalArgumentException("Duplicate key: " + key);
+			}
+			else {
+				String value = entries[i][1];
+				messages.put(key, value);
+			}
+		}
+	}
+
+File: Language.java
+Clone source code:
+{
+		Set inserted = new HashSet(); // for duplicates checking
+		
+		for (int i = 0; i < SQL_STATES.length; i++) {
+			String key = SQL_STATES[i][0];
+			
+			if (! inserted.add(key)) {
+				throw new IllegalArgumentException("Duplicate key: " + key);
+			}
+			else {
+				String value = SQL_STATES[i][1];
+				sqlStates.put(key, value);
+			}
+		}
+	}
+
+Clone class
+File: TestOrderBy.java
+Clone source code:
+{
+		init();
+		Connection con = AllTests.getConnection();
+		Statement st = con.createStatement();
+		ResultSet rs;
+		String oldValue;
+		
+		rs = st.executeQuery("SELECT * FROM " + table1 + " ORDER  by c");
+		
+		assertTrue( rs.next() );
+		
+		oldValue = rs.getString("c");
+		assertNull(oldValue);
+		assertTrue( rs.next() );
+		oldValue = rs.getString("c");
+		
+		int count = 1;
+		while(rs.next()){
+			String newValue = rs.getString("c");
+			assertTrue( oldValue + "<" + newValue, oldValue.compareTo( newValue ) < 0 );
+			oldValue = newValue;
+			count++;
+		}
+		rs.close();
+		assertEquals( valueCount, count );
+	}
+
+File: TestOrderBy.java
+Clone source code:
+{
+		init();
+		Connection con = AllTests.getConnection();
+		Statement st = con.createStatement();
+		ResultSet rs;
+		String oldValue;
+		
+		rs = st.executeQuery("SELECT * FROM " + table1 + " ORDER  by v ASC");
+		
+		assertTrue( rs.next() );
+		
+		oldValue = rs.getString("v");
+		assertNull(oldValue);
+		assertTrue( rs.next() );
+		oldValue = rs.getString("v");
+		
+		int count = 1;
+		while(rs.next()){
+			String newValue = rs.getString("v");
+			assertTrue( oldValue.compareTo( newValue ) < 0 );
+			oldValue = newValue;
+			count++;
+		}
+		rs.close();
+		assertEquals( valueCount, count );
+	}
+
+Clone class
+File: TestOrderBy.java
+Clone source code:
+{
+		init();
+		Connection con = AllTests.getConnection();
+		Statement st = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		ResultSet rs;
+		int count;
+		
+		rs = st.executeQuery("SELECT * FROM " + table1 + " ORDER  by v");
+		
+		//jetzt irgendwo in die Mitte scrollen
+		rs.next();
+		rs.next();
+		rs.previous(); //dann soll der Zeiger nicht am Ende des bereits gefetchten stehen
+		
+		rs.last();
+		count = 0;
+		while(rs.previous()) count++;		
+		assertEquals( valueCount, count );
+
+		rs.beforeFirst();
+		count = -1;
+		while(rs.next()) count++;		
+		assertEquals( valueCount, count );
+
+		rs.beforeFirst();
+		count = -1;
+		while(rs.next()) count++;		
+		assertEquals( valueCount, count );
+	}
+
+File: TestOrderBy.java
+Clone source code:
+{
+		init();
+		Connection con = AllTests.getConnection();
+		Statement st = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		ResultSet rs;
+		int count;
+		
+		rs = st.executeQuery("SELECT * FROM " + table1 + " ORDER  by i desc, d");
+		
+		//jetzt irgendwo in die Mitte scrollen
+		rs.next();
+		rs.next();
+		rs.previous(); //dann soll der Zeiger nicht am Ende des bereits gefetchten stehen
+		
+		rs.last();
+		count = 0;
+		while(rs.previous()) count++;		
+		assertEquals( valueCount, count );
+
+		rs.beforeFirst();
+		count = -1;
+		while(rs.next()) count++;		
+		assertEquals( valueCount, count );
+
+		rs.beforeFirst();
+		count = -1;
+		while(rs.next()) count++;		
+		assertEquals( valueCount, count );
+	}
+
+Clone class
+File: LongTreeList.java
+Clone source code:
+{
+		int oldOffset = offset;
+		
+		//correct all offset that point behind the old node
+		correctPointers( 0, oldOffset, -2, 0 );
+
+		size -= 2;
+		System.arraycopy(data, oldOffset + 2, data, oldOffset, size-oldOffset);
+
+		offset = oldOffset;
+	}
+
+File: LongTreeList.java
+Clone source code:
+{
+		int oldOffset = offset;
+		
+		//correct all offset that point behind the old node
+		correctPointers( 0, oldOffset, -(2+pointerSize), 0 );
+
+		size -= 2+pointerSize;
+		System.arraycopy(data, oldOffset + 2+pointerSize, data, oldOffset, size-oldOffset);
+
+		offset = oldOffset;
+	}
+
+Clone class
+File: BenchTest.java
+Clone source code:
+{
+        try{
+            Statement st = con.createStatement();
+            st.execute("DELETE FROM " + tableName);
+            st.close();
+        }catch(Exception e){/* ignore it */}
+    }
+
+File: BasicTestCase.java
+Clone source code:
+{
+		try {
+			Statement st = con.createStatement();
+			st.execute("drop view "+name);
+			st.close();
+		} catch (SQLException e) {/* ignore it, if the view not exist */}
+    }
+
+File: BenchTest.java
+Clone source code:
+{
+        try{
+            Statement st = con.createStatement();
+            st.execute("drop table " + tableName);
+            st.close();
+        }catch(Exception e){/* ignore it */}
+    }
+
+Clone class
+File: ExpressionFunctionLTrim.java
+Clone source code:
+{
+		if(isNull()) return null;
+		String str = param1.getString();
+        int start = 0;
+        while(start<str.length() && str.charAt(start)==' '){
+            start++;
+        }
+		return str.substring(start);
+	}
+
+File: ExpressionFunctionRTrim.java
+Clone source code:
+{
+		if(isNull()) return null;
+		String str = param1.getString();
+        int length = str.length();
+        while(length>0 && str.charAt(length-1)==' '){
+            length--;
+        }
+		return str.substring(0,length);
+	}
+
+Clone class
+File: TestDBMetaData.java
+Clone source code:
+{
+        Connection con = AllTests.getConnection();
+        DatabaseMetaData md = con.getMetaData();
+        ResultSet rs = md.getSchemas();
+        String[] colNames = {"TABLE_SCHEM"};
+        int[] colTypes = {Types.NULL};
+        assertRSMetaData( rs, colNames, colTypes);
+        assertFalse(rs.next());
+    }
+
+File: TestDBMetaData.java
+Clone source code:
+{
+        Connection con = AllTests.getConnection();
+        DatabaseMetaData md = con.getMetaData();
+        ResultSet rs = md.getUDTs(null, null, null, null);
+        String[] colNames = {"TYPE_CAT", "TYPE_SCHEM", "TYPE_NAME", "CLASS_NAME", "DATA_TYPE", "REMARKS"};
+        int[] colTypes = new int[colNames.length];
+        assertRSMetaData( rs, colNames, colTypes);
+        assertFalse(rs.next());
+    }
+
+Clone class
+File: ExpressionFunctionRepeat.java
+Clone source code:
+{
+        if(isNull()) return null;
+        byte[] bytes = param1.getBytes();
+        int count  = param2.getInt();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        for(int i=0; i<count; i++){
+            buffer.write(bytes);
+        }
+        return buffer.toByteArray();
+	}
+
+File: ExpressionFunctionRepeat.java
+Clone source code:
+{
+		if(isNull()) return null;
+		String str = param1.getString();
+        int count  = param2.getInt();
+        StringBuffer buffer = new StringBuffer();
+        for(int i=0; i<count; i++){
+            buffer.append(str);
+        }
+		return buffer.toString();
+	}
+
+Clone class
+File: TestOrderBy.java
+Clone source code:
+{
+		init();
+		Connection con = AllTests.getConnection();
+		Statement st = con.createStatement();
+		ResultSet rs;
+		Integer oldValue;
+		
+		rs = st.executeQuery("SELECT * FROM " + table1 + " ORDER  by i Asc");
+		
+		assertTrue( rs.next() );
+		
+		oldValue = (Integer)rs.getObject("i");
+		assertNull(oldValue);
+		assertTrue( rs.next() );
+		oldValue = (Integer)rs.getObject("i");
+		
+		int count = 1;
+		while(rs.next()){
+			assertTrue( oldValue.compareTo( (Integer)rs.getObject("i") ) < 0 );
+			oldValue = (Integer)rs.getObject("i");
+			count++;
+		}
+		assertEquals( valueCount, count );
+	}
+
+File: TestOrderBy.java
+Clone source code:
+{
+		init();
+		Connection con = AllTests.getConnection();
+		Statement st = con.createStatement();
+		ResultSet rs;
+		String oldValue;
+		
+		rs = st.executeQuery("SELECT * FROM " + table1 + " ORDER  by nv");
+		
+		assertTrue( rs.next() );
+		
+		oldValue = rs.getString("nv");
+		assertNull(oldValue);
+		assertTrue( rs.next() );
+		oldValue = rs.getString("nv");
+		
+		int count = 1;
+		while(rs.next()){
+			assertTrue( String.CASE_INSENSITIVE_ORDER.compare( oldValue, rs.getString("nv") ) <= 0 );
+			oldValue = rs.getString("nv");
+			count++;
+		}
+		assertEquals( valueCount, count );
+	}
+
+File: TestOrderBy.java
+Clone source code:
+{
+		init();
+		Connection con = AllTests.getConnection();
+		Statement st = con.createStatement();
+		ResultSet rs;
+		Double oldValue;
+		
+		rs = st.executeQuery("SELECT * FROM " + table1 + " ORDER  by d");
+		
+		assertTrue( rs.next() );
+		
+		oldValue = (Double)rs.getObject("d");
+		assertNull(oldValue);
+		assertTrue( rs.next() );
+		oldValue = (Double)rs.getObject("d");
+		
+		int count = 1;
+		while(rs.next()){
+			assertTrue( oldValue.compareTo( (Double)rs.getObject("d") ) < 0 );
+			oldValue = (Double)rs.getObject("d");
+			count++;
+		}
+		assertEquals( valueCount, count );
+	}
+
+File: TestOrderBy.java
+Clone source code:
+{
+		init();
+		Connection con = AllTests.getConnection();
+		Statement st = con.createStatement();
+		ResultSet rs;
+		String oldValue;
+		
+		rs = st.executeQuery("SELECT first(v) cc FROM " + table1 + " Group By i ORDER  by first(V)");
+		
+		assertTrue( rs.next() );
+		
+		oldValue = rs.getString("cc");
+		assertNull(oldValue);
+		assertTrue( rs.next() );
+		oldValue = rs.getString("cc");
+		
+		int count = 1;
+		while(rs.next()){
+			assertTrue( oldValue.compareTo( rs.getString("cc") ) < 0 );
+			oldValue = rs.getString("cc");
+			count++;
+		}
+		assertEquals( valueCount, count );
+	}
+
+File: TestOrderBy.java
+Clone source code:
+{
+		init();
+		Connection con = AllTests.getConnection();
+		Statement st = con.createStatement();
+		ResultSet rs;
+		Long oldValue;
+		
+		rs = st.executeQuery("SELECT * FROM " + table1 + " ORDER  by bi");
+		
+		assertTrue( rs.next() );
+		
+		oldValue = (Long)rs.getObject("bi");
+		assertNull(oldValue);
+		assertTrue( rs.next() );
+		oldValue = (Long)rs.getObject("bi");
+		
+		int count = 1;
+		while(rs.next()){
+			assertTrue( oldValue.compareTo( (Long)rs.getObject("bi") ) < 0 );
+			oldValue = (Long)rs.getObject("bi");
+			count++;
+		}
+		assertEquals( valueCount, count );
+	}
+
+File: TestOrderBy.java
+Clone source code:
+{
+		init();
+		Connection con = AllTests.getConnection();
+		Statement st = con.createStatement();
+		ResultSet rs;
+		Integer oldValue;
+		
+		rs = st.executeQuery("SELECT * FROM " + table1 + " ORDER  by i");
+		
+		assertTrue( rs.next() );
+		
+		oldValue = (Integer)rs.getObject("i");
+		assertNull(oldValue);
+		assertTrue( rs.next() );
+		oldValue = (Integer)rs.getObject("i");
+		
+		int count = 1;
+		while(rs.next()){
+			assertTrue( oldValue.compareTo( (Integer)rs.getObject("i") ) < 0 );
+			oldValue = (Integer)rs.getObject("i");
+			count++;
+		}
+		assertEquals( valueCount, count );
+	}
+
+File: TestOrderBy.java
+Clone source code:
+{
+		init();
+		Connection con = AllTests.getConnection();
+		Statement st = con.createStatement();
+		ResultSet rs;
+		Float oldValue;
+		
+		rs = st.executeQuery("SELECT * FROM " + table1 + " ORDER  by r");
+		
+		assertTrue( rs.next() );
+		
+		oldValue = (Float)rs.getObject("r");
+		assertNull(oldValue);
+		assertTrue( rs.next() );
+		oldValue = (Float)rs.getObject("r");
+		
+		int count = 1;
+		while(rs.next()){
+			assertTrue( oldValue.compareTo( (Float)rs.getObject("r") ) < 0 );
+			oldValue = (Float)rs.getObject("r");
+			count++;
+		}
+		assertEquals( valueCount, count );
+	}
+
+Clone class
+File: SSDatabaseMetaData.java
+Clone source code:
+{
+		try {
+			String[] colNames = {"SCOPE", "COLUMN_NAME", "DATA_TYPE", "TYPE_NAME", "COLUMN_SIZE", "BUFFER_LENGTH", "DECIMAL_DIGITS", "PSEUDO_COLUMN"};
+			Object[][] data   = con.getDatabase(false).getBestRowIdentifier(con, table);
+			return new SSResultSet( st, Utils.createMemoryCommandSelect( con, colNames, data));
+		} catch (Exception e) {
+			throw SmallSQLException.createFromException(e);
+		}
+    }
+
+File: SSDatabaseMetaData.java
+Clone source code:
+{
+		try {
+			String[] colNames = {"TABLE_CAT", "TABLE_SCHEM", "TABLE_NAME", "NON_UNIQUE", "INDEX_QUALIFIER", "INDEX_NAME", "TYPE", "ORDINAL_POSITION", "COLUMN_NAME", "ASC_OR_DESC", "CARDINALITY", "PAGES", "FILTER_CONDITION"};
+			Object[][] data   = con.getDatabase(false).getIndexInfo(con, table, unique);
+			return new SSResultSet( st, Utils.createMemoryCommandSelect( con, colNames, data));
+		} catch (Exception e) {
+			throw SmallSQLException.createFromException(e);
+		}
+    }
+
+File: SSDatabaseMetaData.java
+Clone source code:
+{
+		try {
+			String[] colNames = {"PKTABLE_CAT", "PKTABLE_SCHEM", "PKTABLE_NAME", "PKCOLUMN_NAME", "FKTABLE_CAT", "FKTABLE_SCHEM", "FKTABLE_NAME", "FKCOLUMN_NAME", "KEY_SEQ", "UPDATE_RULE", "DELETE_RULE", "FK_NAME", "PK_NAME", "DEFERRABILITY"};
+			Object[][] data   = con.getDatabase(false).getReferenceKeys(con, primaryTable, foreignTable);
+			return new SSResultSet( st, Utils.createMemoryCommandSelect( con, colNames, data));
+		} catch (Exception e) {
+			throw SmallSQLException.createFromException(e);
+		}
+    }
+
+File: SSDatabaseMetaData.java
+Clone source code:
+{
+		try {
+			String[] colNames = {"TABLE_CAT", "TABLE_SCHEM", "TABLE_NAME", "COLUMN_NAME", "KEY_SEQ", "PK_NAME"};
+			Object[][] data   = con.getDatabase(false).getPrimaryKeys(con, table);
+			return new SSResultSet( st, Utils.createMemoryCommandSelect( con, colNames, data));
+		} catch (Exception e) {
+			throw SmallSQLException.createFromException(e);
+		}
+    }
+
+File: SSDatabaseMetaData.java
+Clone source code:
+{
+		try {
+			String[] colNames = {"TABLE_CAT", "TABLE_SCHEM", "TABLE_NAME", "COLUMN_NAME", "DATA_TYPE", "TYPE_NAME", "COLUMN_SIZE", "BUFFER_LENGTH", "DECIMAL_DIGITS", "NUM_PREC_RADIX", "NULLABLE", "REMARKS", "COLUMN_DEF", "SQL_DATA_TYPE", "SQL_DATETIME_SUB", "CHAR_OCTET_LENGTH", "ORDINAL_POSITION", "IS_NULLABLE"};
+			Object[][] data   = con.getDatabase(false).getColumns(con, tableNamePattern, columnNamePattern);
+			return new SSResultSet( st, Utils.createMemoryCommandSelect( con, colNames, data));
+		} catch (Exception e) {
+			throw SmallSQLException.createFromException(e);
+		}
+    }
+
+Clone class
+File: MutableNumeric.java
+Clone source code:
+{
+        if(value.length == 0 || signum == 0){
+            return 0;
+        }else{
+            if (value.length == 1 && (value[0] > 0)){
+                // simple Integer Value
+                return value[0] / scaleFloatFactor[scale] * signum;
+            }else
+            if (value.length == 1){
+                // overflow Integer Value
+                long temp = value[0] & 0xFFFFFFFFL;
+                return temp / scaleFloatFactor[scale] * signum;
+            }else
+            if (value.length == 2 && (value[0] > 0)){
+                // simple Long Value
+                long temp = (((long)value[0]) << 32) | (value[1] & 0xFFFFFFFFL);
+                return temp / scaleFloatFactor[scale] * signum;
+            }else{
+                return new BigDecimal( new BigInteger( toByteArray() ), scale ).floatValue();
+            }
+        }
+    }
+
+File: MutableNumeric.java
+Clone source code:
+{
+        if(value.length == 0 || signum == 0){
+            return 0;
+        }else{
+            if (value.length == 1 && (value[0] > 0)){
+                // simple Integer Value
+                return value[0] / scaleDoubleFactor[scale] * signum;
+            }else
+            if (value.length == 1){
+                // overflow Integer Value
+                long temp = value[0] & 0xFFFFFFFFL;
+                return temp / scaleDoubleFactor[scale] * signum;
+            }else
+            if (value.length == 2 && (value[0] > 0)){
+                // simple Long Value
+                long temp = (((long)value[0]) << 32) | (value[1] & 0xFFFFFFFFL);
+                return temp / scaleDoubleFactor[scale] * signum;
+            }else{
+                return new BigDecimal( new BigInteger( toByteArray() ), scale ).doubleValue();
+            }
+        }
+    }
+
+Clone class
+File: SSCallableStatement.java
+Clone source code:
+{
+        try{
+            String obj = getValue(i).getString();
+            wasNull = obj == null;
+            return obj;
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+            byte[] obj = getValue(columnIndex).getBytes();
+            wasNull = obj == null;
+            return obj;
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+            Object obj = getValue(columnIndex).getApiObject();
+            wasNull = obj == null;
+            return obj;
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSCallableStatement.java
+Clone source code:
+{
+        try{
+            byte[] obj = getValue(i).getBytes();
+            wasNull = obj == null;
+            return obj;
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSCallableStatement.java
+Clone source code:
+{
+        try{
+            Object obj = getValue(i).getObject();
+            wasNull = obj == null;
+            return obj;
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+Clone class
+File: Database.java
+Clone source code:
+{
+        synchronized(tableViews){
+            Table table = (Table)tableViews.get( tableName );
+            if(table != null){
+				tableViews.remove( tableName );
+                table.drop(con);
+            }else{
+            	Table.drop( this, tableName );
+            }
+        }
+    }
+
+File: Logger.java
+Clone source code:
+{
+		PrintWriter log = DriverManager.getLogWriter();
+		if(log != null){
+			synchronized(log){
+				log.print("[Small SQL]");
+				log.println(msg);
+				log.flush();
+			}
+		}
+	}
+
+Clone class
+File: ExpressionFunctionLeft.java
+Clone source code:
+{
+		if(isNull()) return null;
+		byte[] bytes = param1.getBytes();
+		int length = param2.getInt();
+		if(bytes.length <= length) return bytes;
+
+		byte[] b = new byte[length];
+		System.arraycopy(bytes, 0, b, 0, length);
+		return b;		
+	}
+
+File: ExpressionFunctionRight.java
+Clone source code:
+{
+		if(isNull()) return null;
+		byte[] bytes = param1.getBytes();
+		int length = param2.getInt();
+		if(bytes.length <= length) return bytes;
+
+		byte[] b = new byte[length];
+		System.arraycopy(bytes, bytes.length -length, b, 0, length);
+		return b;		
+	}
+
+Clone class
+File: MutableNumeric.java
+Clone source code:
+{
+		if(num.scale < scale){
+			num.setScale(scale);
+		}else
+		if(num.scale > scale){
+			setScale(num.scale);
+		}
+        add( -num.signum, num.value );
+    }
+
+File: MutableNumeric.java
+Clone source code:
+{
+		if(num.scale < scale){
+			num.setScale(scale);
+		}else
+		if(num.scale > scale){
+			setScale(num.scale);
+		}
+        add( num.signum, num.value );
+    }
+
+Clone class
+File: TestScrollable.java
+Clone source code:
+{
+		Connection con = AllTests.getConnection();
+		try{			
+			con.createStatement().execute("Create Table Scrollable (i counter, v varchar(20))");
+			assertRowCount( 0, "Select * from Scrollable");
+
+			con.createStatement().execute("Insert Into Scrollable(v) Values('qwert')");
+			assertRowCount( 1, "Select * from Scrollable");
+			assertRowCount( 0, "Select * from Scrollable Where 1=0");
+
+            Statement st = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            testNextWithWhereAssert( st.executeQuery("Select * from Scrollable Where 1=0") );
+            testNextWithWhereAssert( st.executeQuery("Select * from Scrollable Where 1=0 Order By v") );
+            testNextWithWhereAssert( st.executeQuery("Select v from Scrollable Where 1=0 Group By v") );
+            testNextWithWhereAssert( st.executeQuery("Select v from Scrollable Where 1=0 Group By v Order By v") );
+		}finally{
+            dropTable( con, "Scrollable");
+		}
+	}
+
+File: TestScrollable.java
+Clone source code:
+{
+		Connection con = AllTests.getConnection();
+		try{			
+			con.createStatement().execute("Create Table Scrollable (i counter, v varchar(20))");
+			assertRowCount( 0, "Select * from Scrollable");
+
+			con.createStatement().execute("Insert Into Scrollable(v) Values('qwert')");
+			assertRowCount( 1, "Select * from Scrollable");
+			assertRowCount( 0, "Select * from Scrollable Where 1=0");
+
+			Statement st = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            testLastWithWhereAssert( st.executeQuery("Select * from Scrollable Where 1=0") );
+            testLastWithWhereAssert( st.executeQuery("Select * from Scrollable Where 1=0 Order By v") );
+            testLastWithWhereAssert( st.executeQuery("Select v from Scrollable Where 1=0 Order By v") );
+            testLastWithWhereAssert( st.executeQuery("Select v from Scrollable Where 1=0 Group By v Order By v") );
+		}finally{
+            dropTable( con, "Scrollable");
+		}
+	}
+
+File: TestScrollable.java
+Clone source code:
+{
+		Connection con = AllTests.getConnection();
+		try{			
+			con.createStatement().execute("Create Table Scrollable (i counter, v varchar(20))");
+			assertRowCount( 0, "Select * from Scrollable");
+
+			con.createStatement().execute("Insert Into Scrollable(v) Values('qwert')");
+			assertRowCount( 1, "Select * from Scrollable");
+			assertRowCount( 0, "Select * from Scrollable Where 1=0");
+
+            Statement st = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            testFirstWithWhereAssert( st.executeQuery("Select * from Scrollable Where 1=0") );
+            testFirstWithWhereAssert( st.executeQuery("Select * from Scrollable Where 1=0 Order By v") );
+            testFirstWithWhereAssert( st.executeQuery("Select v from Scrollable Where 1=0 Group By v") );
+            testFirstWithWhereAssert( st.executeQuery("Select v from Scrollable Where 1=0 Group By v Order By v") );
+		}finally{
+            dropTable( con, "Scrollable");
+		}
+	}
+
+Clone class
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+            MutableNumeric obj = getValue(columnIndex).getNumeric();
+            wasNull = obj == null;
+            if(wasNull) return null;
+            return obj.toBigDecimal(scale);
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(columnIndex);
+            wasNull = expr.isNull();
+            if(wasNull) return null;
+            return new URL( expr.getString() );
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSCallableStatement.java
+Clone source code:
+{
+        try{
+            MutableNumeric obj = getValue(i).getNumeric();
+            wasNull = obj == null;
+            if(wasNull) return null;
+            return obj.toBigDecimal(scale);
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+            MutableNumeric obj = getValue(columnIndex).getNumeric();
+            wasNull = obj == null;
+            if(wasNull) return null;
+            return obj.toBigDecimal();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSCallableStatement.java
+Clone source code:
+{
+        try{
+            MutableNumeric obj = getValue(i).getNumeric();
+            wasNull = obj == null;
+            if(wasNull) return null;
+            return obj.toBigDecimal();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+Clone class
+File: Utils.java
+Clone source code:
+{
+		byte[] result = new byte[4];
+		result[0] = (byte)(value >> 24);
+		result[1] = (byte)(value >> 16);
+		result[2] = (byte)(value >> 8);
+		result[3] = (byte)(value);
+		return result;
+	}
+
+File: TestExceptions.java
+Clone source code:
+{
+        TestValue value = new TestValue();
+        value.sql       = sql;
+        value.sqlstate  = sqlstate;
+        value.errorCode = errorCode;
+        value.errorType = errorType;
+        return value;
+    }
+
+Clone class
+File: ExpressionArithmetic.java
+Clone source code:
+{
+		if(!super.equals(expr)) return false;
+		if(!(expr instanceof ExpressionArithmetic)) return false;
+		if( ((ExpressionArithmetic)expr).operation != operation) return false;
+		return true;
+	}
+
+File: ExpressionName.java
+Clone source code:
+{
+    	if(!super.equals(expr)) return false;
+    	if(!(expr instanceof ExpressionName)) return false;
+    	if( ((ExpressionName)expr).fromEntry != fromEntry) return false;
+    	return true;
+    }
+
+Clone class
+File: TableView.java
+Clone source code:
+{
+	    if( database.isReadOnly() ){
+	        throw SmallSQLException.create(Language.DB_READONLY);
+	    }
+		File file = getFile( database );
+		boolean ok = file.createNewFile();
+		if(!ok) throw SmallSQLException.create(Language.TABLE_EXISTENT, name);
+		FileChannel raFile = Utils.openRaFile( file, database.isReadOnly() );
+		con.add(new CreateFile(file, raFile, con, database));
+		writeMagic(raFile);
+		return raFile;
+	}
+
+File: IndexDescription.java
+Clone source code:
+{
+	    if( database.isReadOnly() ){
+	        throw SmallSQLException.create(Language.DB_READONLY);
+	    }
+		File file = getFile( database, name );
+		boolean ok = file.createNewFile();
+		if(!ok) throw SmallSQLException.create(Language.INDEX_EXISTS, name);
+		FileChannel randomFile = Utils.openRaFile( file, database.isReadOnly() );
+        con.add(new CreateFile(file, randomFile, con, database));
+		writeMagic(randomFile);
+		return randomFile;
+	}
+
+Clone class
+File: TestMoneyRounding.java
+Clone source code:
+{
+            Connection con = AllTests.getConnection();
+            Statement st = con.createStatement();
+            int firstValue = -10000;
+            for(int i=firstValue; i<10000; i++){
+                st.execute("Insert into " + table + "(a,b) values(" + (i/10000.0) + "," +(i/10000.0) +")");
+            }
+            st.close();
+            verify(firstValue);
+    }
+
+File: TestMoneyRounding.java
+Clone source code:
+{
+			Connection con = AllTests.getConnection();
+			Statement st = con.createStatement();
+			int firstValue = -10000;
+			for(int i=firstValue; i<10000; i++){
+				st.execute("Insert into " + table + "(a,b) values( (" + i + "/10000.0), (" + i + "/10000.0) )");
+			}
+			st.close();
+			verify(firstValue);
+	}
+
+Clone class
+File: ExpressionArithmetic.java
+Clone source code:
+{
+        if(isNull()) return 0;
+        int dataType = getDataType();
+        switch(dataType){
+            case SQLTokenizer.BIT:
+            case SQLTokenizer.BOOLEAN:
+				return getBoolean() ? 1 : 0;
+            case SQLTokenizer.TINYINT:
+            case SQLTokenizer.SMALLINT:
+            case SQLTokenizer.INT:
+				return getIntImpl();
+            case SQLTokenizer.BIGINT:
+                return getLongImpl();
+			case SQLTokenizer.REAL:
+                return getFloatImpl();
+			case SQLTokenizer.FLOAT:
+			case SQLTokenizer.DOUBLE:
+            case SQLTokenizer.MONEY:
+            case SQLTokenizer.SMALLMONEY:
+            case SQLTokenizer.NUMERIC:
+            case SQLTokenizer.DECIMAL:
+                return (float)getDoubleImpl();
+        }
+		throw createUnspportedConversion( SQLTokenizer.DOUBLE);
+    }
+
+File: ExpressionArithmetic.java
+Clone source code:
+{
+        if(isNull()) return 0;
+        int dataType = getDataType();
+        switch(dataType){
+            case SQLTokenizer.BIT:
+            case SQLTokenizer.BOOLEAN:
+				return getBoolean() ? 1 : 0;
+            case SQLTokenizer.TINYINT:
+            case SQLTokenizer.SMALLINT:
+            case SQLTokenizer.INT:
+				return getIntImpl();
+            case SQLTokenizer.BIGINT:
+                return getLongImpl();
+			case SQLTokenizer.REAL:
+                return (long)getFloatImpl();
+			case SQLTokenizer.FLOAT:
+			case SQLTokenizer.DOUBLE:
+            case SQLTokenizer.MONEY:
+            case SQLTokenizer.SMALLMONEY:
+            case SQLTokenizer.NUMERIC:
+            case SQLTokenizer.DECIMAL:
+                return (long)getDoubleImpl();
+        }
+		throw createUnspportedConversion( SQLTokenizer.LONG);
+    }
+
+File: ExpressionArithmetic.java
+Clone source code:
+{
+        if(isNull()) return 0;
+        int dataType = getDataType();
+        switch(dataType){
+            case SQLTokenizer.BIT:
+            case SQLTokenizer.BOOLEAN:
+				return getBoolean() ? 1 : 0;
+            case SQLTokenizer.TINYINT:
+            case SQLTokenizer.SMALLINT:
+            case SQLTokenizer.INT:
+				return getIntImpl();
+            case SQLTokenizer.BIGINT:
+                return (int)getLongImpl();
+			case SQLTokenizer.REAL:
+                return (int)getFloatImpl();
+			case SQLTokenizer.FLOAT:
+			case SQLTokenizer.DOUBLE:
+            case SQLTokenizer.MONEY:
+            case SQLTokenizer.SMALLMONEY:
+            case SQLTokenizer.NUMERIC:
+            case SQLTokenizer.DECIMAL:
+            	// FIXME: bug! if get returns a number outside of
+            	// integer interval, it's not rounded to max/min, 
+            	// instead it returns a wrong value
+                return (int)getDoubleImpl();
+        }
+        throw createUnspportedConversion( SQLTokenizer.INT);
+    }
+
+File: ExpressionArithmetic.java
+Clone source code:
+{
+        if(isNull()) return 0;
+        int dataType = getDataType();
+        switch(dataType){
+            case SQLTokenizer.BIT:
+            case SQLTokenizer.BOOLEAN:
+				return getBoolean() ? 1 : 0;
+            case SQLTokenizer.TINYINT:
+            case SQLTokenizer.SMALLINT:
+            case SQLTokenizer.INT:
+				return getIntImpl();
+            case SQLTokenizer.BIGINT:
+                return getLongImpl();
+			case SQLTokenizer.REAL:
+                return getFloatImpl();
+			case SQLTokenizer.FLOAT:
+			case SQLTokenizer.DOUBLE:
+            case SQLTokenizer.MONEY:
+            case SQLTokenizer.SMALLMONEY:
+            case SQLTokenizer.NUMERIC:
+            case SQLTokenizer.DECIMAL:
+                return getDoubleImpl();
+        }
+		throw createUnspportedConversion( SQLTokenizer.DOUBLE);
+    }
+
+Clone class
+File: TestTransactions.java
+Clone source code:
+{
+		Connection con = AllTests.getConnection();
+		try{			
+			con.createStatement().execute("Create Table transactions (i int identity, v varchar(20))");
+			assertRowCount( 0, "Select * from transactions");
+
+			con.createStatement().execute("Insert Into transactions(v) Values('qwert')");
+			assertRowCount( 1, "Select * from transactions");
+
+			con.setAutoCommit(false);
+			con.createStatement().execute("Insert Into transactions(v) Select v From transactions");
+			assertRowCount( 2, "Select * from transactions");
+
+			con.createStatement().execute("Insert Into transactions(v) (Select v From transactions)");
+			assertRowCount( 4, "Select * from transactions");
+			
+			con.rollback();
+			assertRowCount( 1, "Select * from transactions");
+			
+		}finally{
+			try{
+				con.createStatement().execute("Drop Table transactions");
+			}catch(Throwable e){e.printStackTrace();}
+			con.setAutoCommit(true);
+		}
+	}
+
+File: TestTransactions.java
+Clone source code:
+{
+		Connection con = AllTests.getConnection();
+		try{			
+		    con.createStatement().execute("Create Table transactions (i int identity, v varchar(20))");
+			con.setAutoCommit(false);
+			assertRowCount( 0, "Select * from transactions");
+
+			con.createStatement().execute("Insert Into transactions(v) Values('qwert')");
+			assertRowCount( 1, "Select * from transactions");
+
+			con.createStatement().execute("Insert Into transactions(v) Select v From transactions");
+			assertRowCount( 2, "Select * from transactions");
+
+			con.createStatement().execute("Insert Into transactions(v) (Select v From transactions)");
+			assertRowCount( 4, "Select * from transactions");
+			
+			con.rollback();
+			assertRowCount( 0, "Select * from transactions");
+			
+		}finally{
+			try{
+				con.createStatement().execute("Drop Table transactions");
+			}catch(Throwable e){e.printStackTrace();}
+			con.setAutoCommit(true);
+		}
+	}
+
+File: TestTransactions.java
+Clone source code:
+{
+		Connection con = AllTests.getConnection();
+		try{			
+			con.setAutoCommit(false);
+			con.createStatement().execute("Create Table transactions (i int identity, v varchar(20))");
+			assertRowCount( 0, "Select * from transactions");
+
+			con.createStatement().execute("Insert Into transactions(v) Values('qwert')");
+			assertRowCount( 1, "Select * from transactions");
+
+			con.createStatement().execute("Insert Into transactions(v) Select v From transactions");
+			assertRowCount( 2, "Select * from transactions");
+
+			con.createStatement().execute("Insert Into transactions Select * From transactions");
+			assertRowCount( 4, "Select * from transactions");
+			
+			con.commit();
+			assertRowCount( 4, "Select * from transactions");
+			
+		}finally{
+			try{
+				con.createStatement().execute("Drop Table transactions");
+			}catch(Throwable e){e.printStackTrace();}
+			con.setAutoCommit(true);
+		}
+	}
+
+File: TestTransactions.java
+Clone source code:
+{
+		Connection con = AllTests.getConnection();
+		try{			
+			con.createStatement().execute("Create Table transactions (i int identity, v varchar(20))");
+			assertRowCount( 0, "Select * from transactions");
+
+			con.createStatement().execute("Insert Into transactions(v) Values('qwert')");
+			assertRowCount( 1, "Select * from transactions");
+
+			con.setAutoCommit(false);
+			con.createStatement().execute("Insert Into transactions(v) Select v From transactions");
+			assertRowCount( 2, "Select * from transactions");
+
+			con.createStatement().execute("Insert Into transactions (Select * From transactions)");
+			assertRowCount( 4, "Select * from transactions");
+			
+			con.commit();
+			assertRowCount( 4, "Select * from transactions");
+			
+		}finally{
+			try{
+				con.createStatement().execute("Drop Table transactions");
+			}catch(Throwable e){e.printStackTrace();}
+			con.setAutoCommit(true);
+		}
+	}
+
+Clone class
+File: ExpressionArithmetic.java
+Clone source code:
+{
+		if(typeLeft == typeRight) return typeLeft;
+
+		int dataTypeIdx = Math.min( Utils.indexOf( typeLeft, DatatypeRange), Utils.indexOf( typeRight, DatatypeRange) );
+		if(dataTypeIdx < 0) throw new Error("getDataType(): "+typeLeft+", "+typeRight);
+		return DatatypeRange[ dataTypeIdx ];
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+        if(values != null){
+            ExpressionValue value = values[ metaData.getColumnIdx( columnIndex ) ];
+            if(!value.isEmpty() || isInsertRow){ 
+                return value;
+            }
+        }
+        return metaData.getColumnExpression(columnIndex);
+    }
+
+Clone class
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(columnIndex);
+            wasNull = expr.isNull();
+            return expr.getInt();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSCallableStatement.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(i);
+            wasNull = expr.isNull();
+            return expr.getFloat();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(columnIndex);
+            wasNull = expr.isNull();
+            return expr.getDouble();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSCallableStatement.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(i);
+            wasNull = expr.isNull();
+            return expr.getBoolean();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSCallableStatement.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(i);
+            wasNull = expr.isNull();
+            return expr.getInt();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSCallableStatement.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(i);
+            wasNull = expr.isNull();
+            return expr.getLong();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(columnIndex);
+            wasNull = expr.isNull();
+            return expr.getBoolean();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(columnIndex);
+            wasNull = expr.isNull();
+            return expr.getFloat();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(columnIndex);
+            wasNull = expr.isNull();
+            return expr.getLong();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSCallableStatement.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(i);
+            wasNull = expr.isNull();
+            return expr.getLong();
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+Clone class
+File: TestAlterTable.java
+Clone source code:
+{
+        Connection con = AllTests.getConnection();
+        Statement st = con.createStatement();
+        int isolation = con.getTransactionIsolation();
+        con.setAutoCommit(false);
+        try{
+            con.setTransactionIsolation( Connection.TRANSACTION_READ_COMMITTED );
+            ResultSet rs = st.executeQuery("Select * From " + table);
+            rs.next();
+            st.execute("Alter Table " + table + " Add a Varchar(20)");
+            try {
+                rs.next();
+                fail("Alter Table should not work on a table with a lock.");
+            } catch (SQLException ex) {
+                assertSQLException( "01000", 0, ex );
+            }
+        }finally{
+            con.setTransactionIsolation(isolation);
+            con.setAutoCommit(true);
+        }
+    }
+
+File: TestAlterTable.java
+Clone source code:
+{
+        Connection con = AllTests.getConnection();
+        Statement st = con.createStatement();
+        int isolation = con.getTransactionIsolation();
+        con.setAutoCommit(false);
+        try{
+            con.setTransactionIsolation( Connection.TRANSACTION_REPEATABLE_READ );
+            ResultSet rs = st.executeQuery("Select * From " + table);
+            rs.next();
+            try {
+                st.execute("Alter Table " + table + " Add a Varchar(20)");
+                fail("Alter Table should not work on a table with a lock.");
+            } catch (SQLException ex) {
+                assertSQLException( "01000", 0, ex );
+            }
+            rs.next();
+        }finally{
+            con.setTransactionIsolation(isolation);
+            con.setAutoCommit(true);
+        }
+    }
+
+Clone class
+File: ExpressionValue.java
+Clone source code:
+{
+        if(obj == null) return false;
+        switch(dataType){
+            case SQLTokenizer.BIT:
+            case SQLTokenizer.BOOLEAN:
+                return (obj.equals(Boolean.TRUE));
+            case SQLTokenizer.TINYINT:
+            case SQLTokenizer.SMALLINT:
+            case SQLTokenizer.INT:
+            case SQLTokenizer.BIGINT:
+                return ((Number)obj).intValue() != 0;
+            case SQLTokenizer.REAL:
+            case SQLTokenizer.DOUBLE:
+            case SQLTokenizer.MONEY:
+                return ((Number)obj).doubleValue() != 0;
+            default: return Utils.string2boolean( obj.toString() );
+        }
+    }
+
+File: ExpressionValue.java
+Clone source code:
+{
+        if(obj == null) return 0;
+        switch(dataType){
+            case SQLTokenizer.BIT:
+                return (obj.equals(Boolean.TRUE)) ? 1 : 0;
+            case SQLTokenizer.INT:
+            case SQLTokenizer.BIGINT:
+            case SQLTokenizer.DOUBLE:
+            case SQLTokenizer.MONEY:
+                return ((Number)obj).doubleValue();
+			case SQLTokenizer.TIMESTAMP:
+			case SQLTokenizer.TIME:
+			case SQLTokenizer.DATE:
+			case SQLTokenizer.SMALLDATETIME:
+				return ((DateTime)obj).getTimeMillis();
+            default: return Double.parseDouble( obj.toString() );
+        }
+    }
+
+Clone class
+File: TestExceptions.java
+Clone source code:
+{
+    	if(init) return;
+		Connection con = AllTests.getConnection();
+		Statement st = con.createStatement();
+		dropTable( con, "exceptions");
+		st.execute("Create Table exceptions (c varchar(30), i int)");
+		init = true;
+    }
+
+File: TestStatement.java
+Clone source code:
+{
+    	if(init) return;
+		Connection con = AllTests.getConnection();
+		Statement st = con.createStatement();
+		dropTable( con, "statement");
+		st.execute("Create Table statement (c varchar(30), i counter)");
+		init = true;
+    }
+
+Clone class
+File: View.java
+Clone source code:
+{
+        ByteBuffer buffer = ByteBuffer.allocate(8);
+        buffer.putInt(MAGIC_VIEW);
+        buffer.putInt(TABLE_VIEW_VERSION);
+        buffer.position(0);
+        raFile.write(buffer);
+	}
+
+File: Table.java
+Clone source code:
+{
+        ByteBuffer buffer = ByteBuffer.allocate(8);
+        buffer.putInt(MAGIC_TABLE);
+        buffer.putInt(TABLE_VIEW_VERSION);
+        buffer.position(0);
+        raFile.write(buffer);
+	}
+
+File: IndexDescription.java
+Clone source code:
+{
+	    ByteBuffer buffer = ByteBuffer.allocate(8);
+	    buffer.putInt(MAGIC_INDEX);
+	    buffer.putInt(INDEX_VERSION);
+	    buffer.position(0);
+	    raFile.write(buffer);
+	}
+
+Clone class
+File: SSCallableStatement.java
+Clone source code:
+{
+        try{
+            Expression expr = getValue(i);
+            wasNull = expr.isNull();
+            if(wasNull) return null;
+            return DateTime.getTimestamp( expr.getLong() );
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+			Expression expr = getValue(columnIndex);
+            wasNull = expr.isNull();
+			if(wasNull) return null;
+			return DateTime.getTimestamp( expr.getLong() );
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSCallableStatement.java
+Clone source code:
+{
+        try{
+			Expression expr = getValue(i);
+            wasNull = expr.isNull();
+			if(wasNull) return null;
+			return DateTime.getDate( expr.getLong() );
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+			Expression expr = getValue(columnIndex);
+            wasNull = expr.isNull();
+			if(wasNull) return null;
+			return DateTime.getTime( expr.getLong() );
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSCallableStatement.java
+Clone source code:
+{
+        try{
+			Expression expr = getValue(i);
+            wasNull = expr.isNull();
+			if(wasNull) return null;
+			return DateTime.getTime( expr.getLong() );
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+        try{
+			Expression expr = getValue(columnIndex);
+            wasNull = expr.isNull();
+			if(wasNull) return null;
+			return DateTime.getDate( expr.getLong() );
+        }catch(Exception e){
+            throw SmallSQLException.createFromException( e );
+        }
+    }
+
+Clone class
+File: SSResultSet.java
+Clone source code:
+{
+		try{
+            moveToCurrentRow();
+            return getCmd().last();
+		}catch(Exception e){
+			throw SmallSQLException.createFromException(e);
+		}
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+		try{
+            moveToCurrentRow();
+			return getCmd().previous();
+		}catch(Exception e){
+			throw SmallSQLException.createFromException(e);
+		}
+	}
+
+File: SSResultSet.java
+Clone source code:
+{
+		try{
+            moveToCurrentRow();
+			return getCmd().absolute(row);
+		}catch(Exception e){
+			throw SmallSQLException.createFromException(e);
+		}
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+		try{
+            moveToCurrentRow();
+			return getCmd().relative(rows);
+		}catch(Exception e){
+			throw SmallSQLException.createFromException(e);
+		}
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+		try{
+            moveToCurrentRow();
+            return getCmd().next();
+		}catch(Exception e){
+			throw SmallSQLException.createFromException(e);
+		}
+	}
+
+Clone class
+File: TestDBMetaData.java
+Clone source code:
+{
+        Connection con = AllTests.getConnection();
+        DatabaseMetaData md = con.getMetaData();
+        ResultSet rs = md.getProcedures( null, null, "*");
+        String[] colNames = {"PROCEDURE_CAT", "PROCEDURE_SCHEM", "PROCEDURE_NAME", "", "", "", "REMARKS", "PROCEDURE_TYPE"};
+        int[] colTypes = {Types.NULL, Types.NULL, Types.NULL, Types.NULL, Types.NULL, Types.NULL, Types.NULL, Types.NULL };
+        assertRSMetaData( rs, colNames, colTypes);
+    }
+
+File: TestDBMetaData.java
+Clone source code:
+{
+        Connection con = AllTests.getConnection();
+        DatabaseMetaData md = con.getMetaData();
+        ResultSet rs = md.getProcedureColumns( null, null, "*", null);
+        String[] colNames = {"PROCEDURE_CAT", "PROCEDURE_SCHEM", "PROCEDURE_NAME", "COLUMN_NAME", "COLUMN_TYPE", "DATA_TYPE", "TYPE_NAME", "PRECISION", "LENGTH", "SCALE", "RADIX", "NULLABLE", "REMARKS" };
+        int[] colTypes = {Types.NULL, Types.NULL, Types.NULL, Types.NULL, Types.NULL, Types.NULL, Types.NULL, Types.NULL, Types.NULL, Types.NULL, Types.NULL, Types.NULL, Types.NULL };
+        assertRSMetaData( rs, colNames, colTypes);
+    }
+
+Clone class
+File: TestOrderBy.java
+Clone source code:
+{
+		init();
+		Connection con = AllTests.getConnection();
+		Statement st = con.createStatement();
+		ResultSet rs;
+		String oldValue;
+		
+		rs = st.executeQuery("SELECT * FROM " + table1 + " ORDER  by v");
+		
+		assertTrue( rs.next() );
+		
+		oldValue = rs.getString("v");
+		assertNull(oldValue);
+		assertTrue( rs.next() );
+		oldValue = rs.getString("v");
+		
+		int count = 1;
+		while(rs.next()){
+			String newValue = rs.getString("v");
+			assertTrue( oldValue + "<" + newValue, oldValue.compareTo( newValue ) < 0 );
+			oldValue = newValue;
+			count++;
+		}
+		assertEquals( valueCount, count );
+	}
+
+File: TestOrderBy.java
+Clone source code:
+{
+		init();
+		Connection con = AllTests.getConnection();
+		Statement st = con.createStatement();
+		ResultSet rs;
+		Long oldValue;
+		
+		rs = st.executeQuery("SELECT bi/2 bi_2 FROM " + table1 + " ORDER  by (bi/2)");
+		
+		assertTrue( rs.next() );
+		
+		oldValue = (Long)rs.getObject("bi_2");
+		assertNull(oldValue);
+		assertTrue( rs.next() );
+		oldValue = (Long)rs.getObject("bi_2");
+		
+		int count = 1;
+		while(rs.next()){
+			Long newValue = (Long)rs.getObject("bi_2");
+			assertTrue( oldValue + "<="+newValue, oldValue.compareTo( newValue ) <= 0 );
+			oldValue = newValue;
+			count++;
+		}
+		assertEquals( valueCount, count );
+	}
+
+Clone class
+File: SSResultSet.java
+Clone source code:
+{
+		st.con.log.println("insertRow()");
+        if(!isInsertRow){
+            throw SmallSQLException.create(Language.RSET_NOT_INSERT_ROW);
+        }
+		getCmd().insertRow( st.con, values);
+        clearRowBuffer();
+    }
+
+File: SSResultSet.java
+Clone source code:
+{
+		try{
+			if(st.rsType == ResultSet.TYPE_FORWARD_ONLY) throw SmallSQLException.create(Language.RSET_FWDONLY);
+            moveToCurrentRow();
+            getCmd().afterLast();
+		}catch(Exception e){
+			throw SmallSQLException.createFromException(e);
+		}
+	}
+
+Clone class
+File: TestAlterTable2.java
+Clone source code:
+{
+        Connection con = AllTests.getConnection();
+        Statement st = con.createStatement();
+        st.execute("create table "+table+" (a varchar(2) unique)");
+        st.execute("alter table "+table+" add b varchar(4) primary key");
+        ResultSet rs = st.executeQuery("Select * From " + table);
+        assertRSMetaData( rs, new String[]{"a", "b"},  new int[]{Types.VARCHAR, Types.VARCHAR} );
+        rs = con.getMetaData().getIndexInfo( null, null, table, false, false );
+        assertRowCount( 2, rs );
+    }
+
+File: TestAlterTable2.java
+Clone source code:
+{
+        Connection con = AllTests.getConnection();
+        Statement st = con.createStatement();
+        st.execute("create table "+table+" (keyField varchar(2) primary key)");
+        st.execute("alter table "+table+" add anotherField varchar(4)");
+        ResultSet rs = st.executeQuery("Select * From " + table);
+        assertRSMetaData( rs, new String[]{"keyField", "anotherField"},  new int[]{Types.VARCHAR, Types.VARCHAR} );
+        rs = con.getMetaData().getIndexInfo( null, null, table, false, false );
+        assertRowCount( 1, rs );
+    }
+
+File: TestAlterTable2.java
+Clone source code:
+{
+        Connection con = AllTests.getConnection();
+        Statement st = con.createStatement();
+        st.execute("create table "+table+" (a varchar(2))");
+        st.execute("alter table "+table+" add b varchar(4) primary key");
+        ResultSet rs = st.executeQuery("Select * From " + table);
+        assertRSMetaData( rs, new String[]{"a", "b"},  new int[]{Types.VARCHAR, Types.VARCHAR} );
+        rs = con.getMetaData().getIndexInfo( null, null, table, false, false );
+        assertRowCount( 1, rs );
+    }
+
+Clone class
+File: TestExceptionMethods.java
+Clone source code:
+{
+        Connection con = AllTests.getConnection();
+        try{
+            Statement st = con.createStatement();
+            st.execute("Create Table DuplicatedColumn(col INT)");
+            try{
+                st.execute("ALTER TABLE DuplicatedColumn Add Col INT");
+                fail("SQLException 'Duplicated Column' should be throw");
+            }catch(SQLException e){
+                assertSQLException("01000", 0, e);
+            }
+        }finally{
+            dropTable(con, "DuplicatedColumn");
+        }
+    }
+
+File: TestExceptionMethods.java
+Clone source code:
+{
+        Connection con = AllTests.getConnection();
+        try{
+            Statement st = con.createStatement();
+            st.execute("Create Table DuplicatedColumn(col INT)");
+            try{
+                st.execute("INSERT INTO DuplicatedColumn(col,Col) Values(1,2)");
+                fail("SQLException 'Duplicated Column' should be throw");
+            }catch(SQLException e){
+                assertSQLException("01000", 0, e);
+            }
+        }finally{
+            dropTable(con, "DuplicatedColumn");
+        }
+    }
+
+Clone class
+File: LongLongList.java
+Clone source code:
+{
+		int size2 = size << 1;
+		if(size2 >= data.length ){
+			resize(size2);
+		}
+		data[ size2   ] = value1;
+		data[ size2 +1] = value2;
+		size++;
+	}
+
+File: StoreImpl.java
+Clone source code:
+{
+    	int newSize = offset + 2;
+        if(newSize > page.length) resizePage(newSize);
+
+        page[ offset++ ] = (byte)(value >> 8);
+        page[ offset++ ] = (byte)(value);
+    }
+

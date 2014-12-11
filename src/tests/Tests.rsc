@@ -56,6 +56,7 @@ test bool testAddDeclarationToBucket(){
 			}
 		}
 	}
+	println(size(result));
 	return (size(result) == 8);
 }
 
@@ -65,6 +66,7 @@ test bool testCalculateSubtreeClones(){
 	num result = 1;
 	set[Declaration] ast = createAstsFromEclipseProject(project, true);
 	
+	println(size(calculateSubtreeClones(ast,5)));
 	return (size(calculateSubtreeClones(ast,5)) == result); 
 	
 }
@@ -270,21 +272,6 @@ test bool testCountStatements(){
 }
 
 //Main
-test bool testGetClonesExample(){
-	
-	set[Declaration] ast = createAstsFromEclipseProject(project, true);
-	
-	clonesT1 = calculateSubtreeClones(ast,5);
-	clonesT2 = calculateClonesT2(ast, 2);
-	
-	map[int, set[set[tuple[loc,value]]]] allClones = ();
-	allClones[1] = clonesT1;
-	allClones[2] = clonesT2;
-	
-	result = (1:[<"YHello.java","{\n\t\tint i = 0;\n\t\ttry {\n\t\t\ti = 1;\n\t\t} catch (Exception e) {\n\t\t\ti = 2;\n\t\t\tthrow new RuntimeException(e);\n\t\t} catch (OutOfMemoryError e) {\n\t\t\ti = 3;\n\t\t}\n\t\treturn 0;\n\t}">,<"YHello.java","{\n\t\tint i = 0;\n\t\ttry {\n\t\t\ti = 1;\n\t\t} catch (Exception e) {\n\t\t\ti = 2;\n\t\t\tthrow new RuntimeException(e);\n\t\t} catch (OutOfMemoryError e) {\n\t\t\ti = 3;\n\t\t}\n\t\treturn 0;\n\t}">],2:[<"YHello.java","{\n\t\tint i = 0;\n\t\t\n\t\twhile (i \< 10)\n\t\t{\n\t\t\tString j = \"\";\n\t\t\ti = i+1;\n\t\t}\n\t\t\n\t\td();\n\t}">,<"YHello.java","{\n\t\tint j = 0;\n\t\t\n\t\twhile (j \< 10)\n\t\t{\n\t\t\tString k = \"\";\n\t\t\tj = j+1;\n\t\t}\n\t\t\n\t\td();\n\t}">]);
-	return ( getCloneExamples(allClones) == result);
-}
-
 
 test bool testGetCloneMetrics(){
 	

@@ -8,24 +8,6 @@ import lang::java::jdt::m3::Core;
 import lang::java::jdt::m3::AST;
 import util::Math;
 
-/*
-* get some clone examples out of the clone classes
-*/
-public map[int, list[tuple[str,str]]] getCloneExamples(map[int, set[set[tuple[loc,value]]]] clones){
-	map[int, list[tuple[str,str]]] cloneExamples = ();
-	
-	for(i <- [1..3]){
-		cloneExamples[i] = [];
-		for( cloneClass <- clones[i]){
-			for( clone <- cloneClass){
-				cloneExamples[i] += [<clone[0].file, readFile(clone[0])>];
-			}
-			break; 
-		}
-	}
-	
-	return cloneExamples;
-}
 
 /*
 * compute metrics such as code duplication, biggest clone etc. for type 1 and 2 clones
@@ -45,14 +27,6 @@ public map[int, tuple[num,num,num,num]] getCloneMetrics(map[int, set[set[tuple[l
 			cloneMetrics1 = calculateClonesMetrics(clones[i], model);
 		}
 		dupLOCsPerc = cloneMetrics1[0]/totalLOCs * 100;
-	
-		println("\nType <i> Clones
-			 'Duplicated lines : <dupLOCsPerc>%
-	         'Number of clone classes : <size(clones[i])>
-	         'Biggest clone: <cloneMetrics1[1]> LOCs
-	         'Biggest clone class: <biggestCloneClass>
-	         ");
-		
 		cloneMetrics[i] = <dupLOCsPerc, size(clones[i]), cloneMetrics1[1], biggestCloneClass>;
 	}
 	
@@ -64,7 +38,7 @@ public map[int, tuple[num,num,num,num]] getCloneMetrics(map[int, set[set[tuple[l
 */
 private str genOutputJson(map[int, set[set[tuple[loc,value]]]] clones, loc project) {
 	
-	map[int, list[tuple[str,str]]] cloneExamples = getCloneExamples(clones);
+	//map[int, list[tuple[str,str]]] cloneExamples = getCloneExamples(clones);
 	map[int, tuple[num,num,num,num]] cloneMetrics = getCloneMetrics(clones, project);	
 	
 	/*
@@ -99,19 +73,7 @@ private str genOutputJson(map[int, set[set[tuple[loc,value]]]] clones, loc proje
 		json += "\"duplicationPercentage\" : " + toString(cloneMetrics[i][0]) + ",";
 		json += "\"noOfCloneClasses\" : " + toString(cloneMetrics[i][1]) + ",";
 		json += "\"biggestClone\" : " + toString(cloneMetrics[i][2]) + ",";
-		json += "\"biggestCloneClass\" : " + toString(cloneMetrics[i][3]) + ",";
-		json += "\"exampleClones\" : [" ;
-		bool firstExample = true;
-		for( c <- cloneExamples[i]){
-			if(!firstExample)
-				json += ",";
-			firstExample = false;
-			json += "{";
-			json += "\"fileName\" : \"" + c[0] + "\",";
-			json += "\"clone\" : \"" + c[1] + "\"";
-			json += "}";
-		}
-		json += "]";
+		json += "\"biggestCloneClass\" : " + toString(cloneMetrics[i][3]); // + ",";
 		json += "}";
 		if(i == 1)
 			json += ",";
@@ -148,13 +110,27 @@ private str genOutputJson(map[int, set[set[tuple[loc,value]]]] clones, loc proje
 	}
 	
 	json += "]}";
-	println(json);
+	//println(json);
 	
 	loc jsonFile = |project://SoftwareEvolutionWDC2/src/json.txt|;
 	writeFile(jsonFile, json);
 	return json;
 }
 
+public void writeClonesToFile(map[int, set[set[tuple[loc,value]]]] clones, loc project){
+	loc clonesFile = |project://SoftwareEvolutionWDC2/src/clones.txt|;
+	writeFile(clonesFile, "");
+	for(cloneType <- clones){
+		str cloneTypeMsg = "Type <cloneType> clones:\n\n\n";
+		appendToFile(clonesFile, cloneTypeMsg);
+		for(cloneClass <- clones[cloneType]){
+			appendToFile(clonesFile, "Clone class\n");
+			for(clone <- cloneClass){
+				appendToFile(clonesFile, "File: <clone[0].file>\nClone source code:\n<readFile(clone[0])>\n\n");
+			}
+		}
+	}
+}
 
 public void main(loc project) {
 	
@@ -163,15 +139,25 @@ public void main(loc project) {
 	/*
 	* Type 1 clones
 	*/
+	println("Indentifying type 1 clones...");
 	clonesT1 = calculateClonesT1(ast);
+	println("Done!");
 	
 	/*
 	*Type 2 clones
 	*/
+	println("Identifying type 2 clones...");
 	clonesT2 = calculateClonesT2(ast, 2);
+	println("Done");
 	
+	println("Generating json for visualization...");
 	map[int, set[set[tuple[loc,value]]]] allClones = ();
 	allClones[1] = clonesT1;
 	allClones[2] = clonesT2;
 	genOutputJson(allClones, project);
+	println("Done!");
+	
+	println("Writing clones to file...");
+	writeClonesToFile(allClones, project);
+	println("Done!");
 }
